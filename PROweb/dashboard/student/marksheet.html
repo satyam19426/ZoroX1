@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Marksheet – Student Portal</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <style>
+    .marksheet-print-wrapper { background: #fff; color: #111827; border: 2px solid #374151; border-radius: var(--radius-xl); padding: 3rem; margin: 0 auto; max-width: 750px; font-family: 'Inter', sans-serif; position: relative; }
+    .marksheet-header { text-align: center; border-bottom: 2px double #374151; padding-bottom: 1.5rem; margin-bottom: 2rem; }
+    .marksheet-title { font-weight: 900; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.05em; color: #1e3a8a; }
+    .marksheet-subtitle { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; font-weight: 700; color: #4b5563; }
+    .marksheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; font-size: 0.85rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 1rem; }
+    .marksheet-field { display: flex; gap: 0.5rem; margin-bottom: 0.375rem; }
+    .marksheet-label { font-weight: 700; width: 120px; color: #374151; }
+    .marksheet-val { font-weight: 500; color: #111827; }
+    .marksheet-table { width: 100%; border-collapse: collapse; margin-bottom: 2.5rem; font-size: 0.875rem; }
+    .marksheet-table th, .marksheet-table td { padding: 0.75rem 1rem; border: 1px solid #d1d5db; text-align: left; }
+    .marksheet-table th { background: #f3f4f6; font-weight: 700; }
+    .marksheet-footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center; margin-top: 4rem; font-size: 0.8rem; font-weight: 700; color: #4b5563; }
+    .signature-line { border-top: 1px solid #374151; padding-top: 0.5rem; margin-top: 2rem; }
+    @media print {
+      body * { visibility: hidden; }
+      #marksheet-print-area, #marksheet-print-area * { visibility: visible; }
+      #marksheet-print-area { position: absolute; left: 0; top: 0; width: 100%; border: none; padding: 0; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Student Portal</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#4c1d95,#7c3aed)">P</div><div><div class="sidebar-user-name">Priya Patel</div><div class="sidebar-user-role">ADCA &bull; Roll: R2024002</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">My Portal</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128100;</span> My Profile</a>
+      <a href="course.html" class="sidebar-link"><span class="icon">&#128218;</span> My Course</a>
+      <a href="certificate.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificate</a>
+      <a href="marksheet.html" class="sidebar-link active"><span class="icon">&#128203;</span> Marksheet</a>
+      <a href="status.html" class="sidebar-link"><span class="icon">&#128203;</span> Application Status</a>
+      <a href="notifications.html" class="sidebar-link"><span class="icon">&#128276;</span> Notifications <span class="sidebar-badge">2</span></a>
+      <div class="sidebar-section">Account</div>
+      <a href="../../pages/auth/login.html" class="sidebar-link" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a>
+    </nav>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left"><button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="topbar-title">Student Marksheet</span></div>
+      <div class="topbar-right"><button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><div style="width:2rem;height:2rem;background:linear-gradient(135deg,#4c1d95,#7c3aed);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">P</div></div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+        <div>
+          <h1>Official Transcript / Marksheet</h1>
+          <p>Verify your subject-wise scores and print official examination record sheets</p>
+        </div>
+        <button onclick="window.print()" class="btn btn-primary no-print">🖨️ Print Transcript</button>
+      </div>
+
+      <!-- Printable Marksheet Wrapper -->
+      <div class="marksheet-print-wrapper" id="marksheet-print-area">
+        <div class="marksheet-header">
+          <div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:0.5rem">OFFICIAL ACADEMIC TRANSCRIPT</div>
+          <h1 class="marksheet-title">TechPro Institute of Computer Education</h1>
+          <div class="marksheet-subtitle">ISO 9001:2015 Certified | Recognized by Skill India</div>
+        </div>
+
+        <div class="marksheet-grid">
+          <div>
+            <div class="marksheet-field"><span class="marksheet-label">Student Name:</span><span class="marksheet-val">Priya Patel</span></div>
+            <div class="marksheet-field"><span class="marksheet-label">Roll Number:</span><span class="marksheet-val" style="color:var(--primary)">R2024002</span></div>
+            <div class="marksheet-field"><span class="marksheet-label">Student ID:</span><span class="marksheet-val">STU002</span></div>
+          </div>
+          <div>
+            <div class="marksheet-field"><span class="marksheet-label">Course:</span><span class="marksheet-val">Advanced Diploma (ADCA)</span></div>
+            <div class="marksheet-field"><span class="marksheet-label">Franchise Center:</span><span class="marksheet-val">TechPro Laxmi Nagar (Delhi)</span></div>
+            <div class="marksheet-field"><span class="marksheet-label">Date of Issue:</span><span class="marksheet-val">2024-06-04</span></div>
+          </div>
+        </div>
+
+        <table class="marksheet-table">
+          <thead>
+            <tr>
+              <th>Evaluation Paper</th>
+              <th>Maximum Marks</th>
+              <th>Marks Obtained</th>
+              <th>Grade Point</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Paper I: Theory Examination (MS Office, Database, Systems)</td>
+              <td>100</td>
+              <td><strong>88</strong></td>
+              <td>A+</td>
+            </tr>
+            <tr>
+              <td>Paper II: Practical & Project Evaluation (Tally, Photoshop, Scripting)</td>
+              <td>100</td>
+              <td><strong>92</strong></td>
+              <td>A+</td>
+            </tr>
+            <tr style="background:#f9fafb;font-weight:800;font-size:0.95rem">
+              <td>Total Aggregate Score</td>
+              <td>200</td>
+              <td style="color:var(--primary)">180</td>
+              <td>A+ (90.0%)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;background:#ecfdf5;border:1px solid #a7f3d0;padding:1rem 1.5rem;border-radius:var(--radius-lg)">
+          <div>
+            <span style="font-size:0.8rem;color:#065f46;font-weight:700">AGGREGATE PERCENTAGE</span>
+            <div style="font-size:1.5rem;font-weight:900;color:#047857">90.0%</div>
+          </div>
+          <div style="text-align:right">
+            <span style="font-size:0.8rem;color:#065f46;font-weight:700">FINAL RESULT</span>
+            <div style="font-size:1.5rem;font-weight:900;color:#047857">PASSED WITH DISTINCTION</div>
+          </div>
+        </div>
+
+        <div class="marksheet-footer-grid">
+          <div>
+            <div class="signature-line">Exam Controller</div>
+          </div>
+          <div>
+            <div style="width:5rem;height:5rem;border:1px solid var(--border);margin:0 auto;display:flex;align-items:center;justify-content:center;background:var(--bg-2);font-size:0.65rem;color:var(--text-muted)">QR Verification</div>
+          </div>
+          <div>
+            <div class="signature-line">Center Director</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>document.getElementById('sidebar-overlay').addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebar-overlay').style.display='none';});</script>
+</body>
+</html>

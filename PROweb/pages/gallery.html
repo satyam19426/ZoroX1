@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery – TechPro Institute</title>
+  <meta name="description" content="View photos from TechPro Institute centers, labs, events and student activities across India.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    .gallery-masonry { columns: 4; column-gap: 1rem; }
+    .gallery-masonry .gallery-item { break-inside: avoid; margin-bottom: 1rem; aspect-ratio: unset; }
+    .gallery-masonry .gallery-item-img { width:100%; height:auto; border-radius:var(--radius-lg); display:block; }
+    .gallery-placeholder { width:100%; background: linear-gradient(135deg, #1e3a8a20, #1a56db20); border-radius: var(--radius-lg); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.5rem; color:var(--text-muted); font-size:2rem; border: 1px solid var(--border); }
+    .lightbox { position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:9999; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; transition:opacity 0.3s; }
+    .lightbox.active { opacity:1; visibility:visible; }
+    @media(max-width:1024px){.gallery-masonry{columns:3}}
+    @media(max-width:768px){.gallery-masonry{columns:2}}
+    @media(max-width:480px){.gallery-masonry{columns:1}}
+  </style>
+</head>
+<body>
+  <nav id="navbar"><div class="container"><div class="navbar-inner"><a href="../index.html" class="logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div><div>TechPro<span style="color:var(--accent)"> Institute</span></div></a><div class="nav-links"><a href="../index.html" class="nav-link">Home</a><a href="courses.html" class="nav-link">Courses</a><a href="gallery.html" class="nav-link active">Gallery</a><a href="contact.html" class="nav-link">Contact</a></div><div class="nav-actions"><button class="dark-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><a href="auth/login.html" class="btn btn-primary btn-sm">Login</a><button class="hamburger"><span></span><span></span><span></span></button></div></div></div></nav>
+  <div class="mobile-nav"><div class="mobile-nav-header"><span class="logo">TechPro</span><button class="mobile-nav-close" style="width:2.5rem;height:2.5rem;border-radius:50%;border:1px solid var(--border);font-size:1.5rem">&times;</button></div><div class="mobile-nav-links"><a href="../index.html" class="mobile-nav-link">Home</a><a href="courses.html" class="mobile-nav-link">Courses</a></div></div>
+
+  <section class="page-hero" style="background:linear-gradient(135deg,#1e1b4b,#312e81,#4338ca)"><div class="container page-hero-content" style="text-align:center"><h1>&#128247; Gallery</h1><p>Moments from TechPro Institute – labs, events, graduations, and more</p></div></section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Filter -->
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem">
+        <button onclick="filterGallery('all')" class="filter-btn active" id="gf-all" style="padding:0.5rem 1.25rem;border-radius:9999px;font-size:0.875rem;font-weight:600;border:1.5px solid var(--border);background:var(--primary);color:#fff">All Photos</button>
+        <button onclick="filterGallery('labs')" class="filter-btn" id="gf-labs" style="padding:0.5rem 1.25rem;border-radius:9999px;font-size:0.875rem;font-weight:600;border:1.5px solid var(--border);color:var(--text-muted);background:var(--bg)">&#128187; Labs</button>
+        <button onclick="filterGallery('events')" class="filter-btn" id="gf-events" style="padding:0.5rem 1.25rem;border-radius:9999px;font-size:0.875rem;font-weight:600;border:1.5px solid var(--border);color:var(--text-muted);background:var(--bg)">&#127881; Events</button>
+        <button onclick="filterGallery('graduation')" class="filter-btn" id="gf-graduation" style="padding:0.5rem 1.25rem;border-radius:9999px;font-size:0.875rem;font-weight:600;border:1.5px solid var(--border);color:var(--text-muted);background:var(--bg)">&#127891; Graduation</button>
+        <button onclick="filterGallery('centers')" class="filter-btn" id="gf-centers" style="padding:0.5rem 1.25rem;border-radius:9999px;font-size:0.875rem;font-weight:600;border:1.5px solid var(--border);color:var(--text-muted);background:var(--bg)">&#127979; Centers</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-masonry" id="gallery-grid"></div>
+    </div>
+  </section>
+
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="../index.html" class="logo" style="margin-bottom:1rem"><div class="logo-icon" style="background:linear-gradient(135deg,var(--primary),var(--accent))"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro Institute</a><p class="footer-desc">Empowering careers since 2010.</p></div><div><h4 class="footer-heading">Quick Links</h4><a href="about.html" class="footer-link">About</a><a href="courses.html" class="footer-link">Courses</a><a href="contact.html" class="footer-link">Contact</a></div><div><h4 class="footer-heading">Verify</h4><a href="verify/certificate.html" class="footer-link">Certificate</a><a href="verify/marksheet.html" class="footer-link">Marksheet</a></div><div><h4 class="footer-heading">Contact</h4><div class="footer-contact-item"><span>&#128205;</span><span>Noida, UP</span></div></div></div><div class="footer-bottom"><p>&copy; 2024 TechPro Institute.</p></div></div></footer>
+
+  <script src="../data/dummy.js"></script><script src="../assets/js/main.js"></script>
+  <script>
+    const galleryItems = [
+      { cat:'labs', label:'Computer Lab - Noida Center', emoji:'&#128187;', bg:'linear-gradient(135deg,#1e3a8a,#1a56db)', h:200 },
+      { cat:'events', label:'Annual Day Celebration 2024', emoji:'&#127881;', bg:'linear-gradient(135deg,#4c1d95,#7c3aed)', h:260 },
+      { cat:'graduation', label:'Certificate Distribution Ceremony', emoji:'&#127891;', bg:'linear-gradient(135deg,#064e3b,#10b981)', h:180 },
+      { cat:'centers', label:'TechPro Noida Center', emoji:'&#127979;', bg:'linear-gradient(135deg,#78350f,#f59e0b)', h:220 },
+      { cat:'labs', label:'Advanced Computing Lab', emoji:'&#128421;&#65039;', bg:'linear-gradient(135deg,#1c1917,#57534e)', h:250 },
+      { cat:'events', label:'Student Orientation Day', emoji:'&#128101;', bg:'linear-gradient(135deg,#831843,#ec4899)', h:190 },
+      { cat:'centers', label:'TechPro Delhi Center', emoji:'&#127968;', bg:'linear-gradient(135deg,#0c4a6e,#38bdf8)', h:240 },
+      { cat:'graduation', label:'Batch 2023 Graduation', emoji:'&#127941;', bg:'linear-gradient(135deg,#1e3a8a,#7c3aed)', h:200 },
+      { cat:'labs', label:'Graphic Design Studio', emoji:'&#127912;', bg:'linear-gradient(135deg,#4c1d95,#8b5cf6)', h:180 },
+      { cat:'events', label:'Franchise Partner Meet 2024', emoji:'&#129309;', bg:'linear-gradient(135deg,#064e3b,#059669)', h:260 },
+      { cat:'centers', label:'TechPro Lucknow Center', emoji:'&#128205;', bg:'linear-gradient(135deg,#1e1b4b,#4338ca)', h:200 },
+      { cat:'events', label:'Tech Seminar on AI & ML', emoji:'&#129302;', bg:'linear-gradient(135deg,#1c1917,#78350f)', h:220 },
+    ];
+    let allItems = [...galleryItems];
+    function renderGallery(items) {
+      const grid = document.getElementById('gallery-grid');
+      grid.innerHTML = '';
+      items.forEach((item, i) => {
+        const el = document.createElement('div');
+        el.className = 'gallery-item';
+        el.dataset.cat = item.cat;
+        el.innerHTML = `
+          <div class="gallery-placeholder" style="height:${item.h}px;background:${item.bg};cursor:pointer" onclick="openLightbox(${i})">
+            <div style="font-size:3rem">${item.emoji}</div>
+            <div style="font-size:0.75rem;opacity:0.8;padding:0 1rem;text-align:center;color:#fff">${item.label}</div>
+          </div>
+          <div class="gallery-overlay"><span>${item.label}</span></div>`;
+        grid.appendChild(el);
+      });
+    }
+    renderGallery(galleryItems);
+    function filterGallery(cat) {
+      document.querySelectorAll('[id^=gf-]').forEach(btn => { btn.style.background='var(--bg)'; btn.style.color='var(--text-muted)'; });
+      document.getElementById('gf-'+cat).style.background='var(--primary)'; document.getElementById('gf-'+cat).style.color='#fff';
+      allItems = cat === 'all' ? galleryItems : galleryItems.filter(i => i.cat === cat);
+      renderGallery(allItems);
+    }
+    function openLightbox(idx) {
+      const item = allItems[idx];
+      const lb = document.createElement('div');
+      lb.className = 'lightbox active';
+      lb.onclick = () => lb.remove();
+      lb.innerHTML = `
+        <div style="background:${item.bg};width:min(90vw,600px);height:400px;border-radius:1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative">
+          <button style="position:absolute;top:1rem;right:1rem;color:#fff;font-size:2rem;background:rgba(0,0,0,0.4);border:none;border-radius:50%;width:3rem;height:3rem;cursor:pointer" onclick="this.closest('.lightbox').remove()">&times;</button>
+          <div style="font-size:6rem">${item.emoji}</div>
+          <div style="color:#fff;font-weight:700;font-size:1.25rem;margin-top:1rem;text-align:center;padding:0 2rem">${item.label}</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:0.875rem;margin-top:0.5rem">${item.cat.charAt(0).toUpperCase()+item.cat.slice(1)}</div>
+        </div>`;
+      document.body.appendChild(lb);
+    }
+  </script>
+</body>
+</html>

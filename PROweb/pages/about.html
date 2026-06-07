@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us – TechPro Institute</title>
+  <meta name="description" content="Learn about TechPro Institute's mission, vision, leadership team and 15 years of excellence in computer education across India.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+    .about-visual { background:linear-gradient(135deg,#1e3a8a,#1a56db); border-radius:2rem; padding:3rem; color:#fff; text-align:center; }
+    .team-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+    .team-card { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-xl); padding:2rem; text-align:center; transition:var(--transition); }
+    .team-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-4px); }
+    .team-avatar { width:5rem; height:5rem; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--accent)); display:flex; align-items:center; justify-content:center; font-size:1.75rem; margin:0 auto 1rem; color:#fff; font-weight:700; }
+    .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .value-card { padding:2rem; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-lg); }
+    .value-icon { font-size:2.5rem; margin-bottom:1rem; }
+    @media(max-width:768px){.about-grid,.team-grid,.values-grid{grid-template-columns:1fr;}}
+    @media(max-width:1024px){.team-grid{grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav id="navbar"><div class="container"><div class="navbar-inner"><a href="../index.html" class="logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div><div>TechPro<span style="color:var(--accent)"> Institute</span></div></a><div class="nav-links"><a href="../index.html" class="nav-link">Home</a><a href="about.html" class="nav-link active">About</a><a href="courses.html" class="nav-link">Courses</a><a href="verify/certificate.html" class="nav-link">Verify</a><a href="franchise.html" class="nav-link">Franchise</a><a href="centers.html" class="nav-link">Centers</a><a href="contact.html" class="nav-link">Contact</a></div><div class="nav-actions"><button class="dark-toggle" title="Toggle Dark Mode"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><a href="auth/login.html" class="btn btn-outline btn-sm">Login</a><a href="auth/register.html" class="btn btn-primary btn-sm">Register</a><button class="hamburger"><span></span><span></span><span></span></button></div></div></div></nav>
+  <div class="mobile-nav"><div class="mobile-nav-header"><a href="../index.html" class="logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</a><button class="mobile-nav-close" style="width:2.5rem;height:2.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);font-size:1.5rem">×</button></div><div class="mobile-nav-links"><a href="../index.html" class="mobile-nav-link">🏠 Home</a><a href="about.html" class="mobile-nav-link">ℹ️ About</a><a href="courses.html" class="mobile-nav-link">📚 Courses</a><a href="franchise.html" class="mobile-nav-link">🏢 Franchise</a><a href="contact.html" class="mobile-nav-link">📞 Contact</a><a href="auth/login.html" class="mobile-nav-link">🔐 Login</a></div></div>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container page-hero-content" style="text-align:center">
+      <h1>About TechPro Institute</h1>
+      <p>15+ years of empowering careers through quality computer education</p>
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div data-animate="fade-up">
+          <span class="badge">Our Story</span>
+          <h2 style="font-size:2.25rem;font-weight:800;margin:1rem 0">Empowering India Through Digital Education Since 2010</h2>
+          <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem">TechPro Institute of Computer Education was founded in 2010 with a simple yet powerful vision: to make quality computer education accessible to every Indian, regardless of location or economic background.</p>
+          <p style="color:var(--text-muted);line-height:1.8;margin-bottom:2rem">Starting from a single center in Noida, we have grown to become one of India's most trusted computer education networks with 320+ franchise centers across 24 states, serving over 45,000 students every year.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div style="background:var(--primary-50);border-radius:var(--radius-lg);padding:1.5rem">
+              <div style="font-size:2rem;margin-bottom:0.5rem">🎯</div>
+              <h4 style="font-weight:700;margin-bottom:0.375rem">Our Mission</h4>
+              <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.6">To deliver industry-relevant computer education that creates skilled professionals capable of thriving in the digital economy.</p>
+            </div>
+            <div style="background:var(--primary-50);border-radius:var(--radius-lg);padding:1.5rem">
+              <div style="font-size:2rem;margin-bottom:0.5rem">🔭</div>
+              <h4 style="font-weight:700;margin-bottom:0.375rem">Our Vision</h4>
+              <p style="font-size:0.875rem;color:var(--text-muted);line-height:1.6">To be India's #1 computer education network, touching 1 million lives through skill development by 2030.</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual" data-animate="fade-left">
+          <div style="font-size:4rem;margin-bottom:1.5rem">🏛️</div>
+          <h3 style="font-size:1.75rem;font-weight:800;margin-bottom:1rem">TechPro Institute</h3>
+          <p style="opacity:0.85;margin-bottom:2rem">Established 2010 | ISO 9001:2015 Certified | NIELIT Recognized</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div style="background:rgba(255,255,255,0.1);border-radius:1rem;padding:1.25rem">
+              <div style="font-size:2rem;font-weight:900;color:#fbbf24">45K+</div>
+              <div style="font-size:0.8rem;opacity:0.8">Students</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.1);border-radius:1rem;padding:1.25rem">
+              <div style="font-size:2rem;font-weight:900;color:#fbbf24">320+</div>
+              <div style="font-size:0.8rem;opacity:0.8">Centers</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.1);border-radius:1rem;padding:1.25rem">
+              <div style="font-size:2rem;font-weight:900;color:#fbbf24">48+</div>
+              <div style="font-size:0.8rem;opacity:0.8">Courses</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.1);border-radius:1rem;padding:1.25rem">
+              <div style="font-size:2rem;font-weight:900;color:#fbbf24">24</div>
+              <div style="font-size:0.8rem;opacity:0.8">States</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section" style="background:var(--bg-2)">
+    <div class="container">
+      <div class="section-header" data-animate="fade-up">
+        <span class="badge">Our Journey</span>
+        <h2 class="section-title">15 Years of Growth</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div style="max-width:700px;margin:0 auto">
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">2010</div><div class="timeline-title">Founded in Noida</div><div class="timeline-desc">TechPro Institute started with a single center and 3 courses, serving 50 students.</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">2013</div><div class="timeline-title">Franchise Model Launch</div><div class="timeline-desc">Launched franchise program. Reached 25 centers across Uttar Pradesh within the first year.</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">2015</div><div class="timeline-title">ISO Certification</div><div class="timeline-desc">Achieved ISO 9001:2015 certification. Expanded to 100+ centers and crossed 10,000 students.</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">2018</div><div class="timeline-title">National Expansion</div><div class="timeline-desc">Expanded to 15+ states. Launched digital learning platform. 200+ franchise centers operational.</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">2020</div><div class="timeline-title">NIELIT Recognition</div><div class="timeline-desc">Partnered with NIELIT for CCC and other government-recognized certificate programs.</div></div>
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date">2024</div><div class="timeline-title">45,000+ Students</div><div class="timeline-desc">Currently serving 45,000+ students through 320+ centers across 24 states with 48+ courses.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header" data-animate="fade-up">
+        <span class="badge">Leadership</span>
+        <h2 class="section-title">Meet Our Team</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="team-grid">
+        <div class="team-card" data-animate="fade-up"><div class="team-avatar">R</div><h3 style="font-weight:700;margin-bottom:0.25rem">Dr. R.K. Sharma</h3><div style="font-size:0.8rem;color:var(--primary);font-weight:600;margin-bottom:0.75rem">Founder & CEO</div><p style="font-size:0.875rem;color:var(--text-muted)">20+ years in IT education. PhD Computer Science, IIT Delhi.</p></div>
+        <div class="team-card" data-animate="fade-up"><div class="team-avatar" style="background:linear-gradient(135deg,#7c3aed,#4c1d95)">S</div><h3 style="font-weight:700;margin-bottom:0.25rem">Dr. Sunita Arora</h3><div style="font-size:0.8rem;color:var(--primary);font-weight:600;margin-bottom:0.75rem">Academic Director</div><p style="font-size:0.875rem;color:var(--text-muted)">Curriculum design expert. 15+ years in academic administration.</p></div>
+        <div class="team-card" data-animate="fade-up"><div class="team-avatar" style="background:linear-gradient(135deg,#059669,#065f46)">V</div><h3 style="font-weight:700;margin-bottom:0.25rem">Vikram Singh</h3><div style="font-size:0.8rem;color:var(--primary);font-weight:600;margin-bottom:0.75rem">Head of Technology</div><p style="font-size:0.875rem;color:var(--text-muted)">Ex-Google engineer. Leads our digital platform and curriculum tech.</p></div>
+        <div class="team-card" data-animate="fade-up"><div class="team-avatar" style="background:linear-gradient(135deg,#dc2626,#991b1b)">M</div><h3 style="font-weight:700;margin-bottom:0.25rem">Meera Gupta</h3><div style="font-size:0.8rem;color:var(--primary);font-weight:600;margin-bottom:0.75rem">Head of Franchise</div><p style="font-size:0.875rem;color:var(--text-muted)">Built franchise network from 10 to 320 centers in 8 years.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="section" style="background:var(--bg-2)">
+    <div class="container">
+      <div class="section-header" data-animate="fade-up">
+        <span class="badge">Our Values</span>
+        <h2 class="section-title">What We Stand For</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="values-grid">
+        <div class="value-card" data-animate="fade-up"><div class="value-icon">🏆</div><h3 style="font-weight:700;margin-bottom:0.5rem">Excellence</h3><p style="font-size:0.9rem;color:var(--text-muted)">We maintain the highest standards in curriculum design, teaching quality, and student outcomes.</p></div>
+        <div class="value-card" data-animate="fade-up"><div class="value-icon">🤝</div><h3 style="font-weight:700;margin-bottom:0.5rem">Integrity</h3><p style="font-size:0.9rem;color:var(--text-muted)">Transparent operations, honest assessments, and genuine certificates that employers trust.</p></div>
+        <div class="value-card" data-animate="fade-up"><div class="value-icon">🌱</div><h3 style="font-weight:700;margin-bottom:0.5rem">Empowerment</h3><p style="font-size:0.9rem;color:var(--text-muted)">We believe every student has the potential to succeed in the digital economy with the right skills.</p></div>
+        <div class="value-card" data-animate="fade-up"><div class="value-icon">💡</div><h3 style="font-weight:700;margin-bottom:0.5rem">Innovation</h3><p style="font-size:0.9rem;color:var(--text-muted)">Continuously updating our curriculum to match the latest industry trends and technology demands.</p></div>
+        <div class="value-card" data-animate="fade-up"><div class="value-icon">🤲</div><h3 style="font-weight:700;margin-bottom:0.5rem">Accessibility</h3><p style="font-size:0.9rem;color:var(--text-muted)">Making quality education affordable and accessible to every corner of India.</p></div>
+        <div class="value-card" data-animate="fade-up"><div class="value-icon">🌐</div><h3 style="font-weight:700;margin-bottom:0.5rem">Community</h3><p style="font-size:0.9rem;color:var(--text-muted)">Building a strong alumni network that supports each other's growth and career development.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><a href="../index.html" class="logo" style="margin-bottom:1rem"><div class="logo-icon" style="background:linear-gradient(135deg,var(--primary),var(--accent))"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro Institute</a><p class="footer-desc">Empowering careers through quality computer education since 2010.</p><div class="social-links"><a href="#" class="social-link">f</a><a href="#" class="social-link">t</a><a href="#" class="social-link">in</a><a href="#" class="social-link">▶</a></div></div>
+        <div><h4 class="footer-heading">Quick Links</h4><a href="courses.html" class="footer-link">Courses</a><a href="franchise.html" class="footer-link">Franchise</a><a href="centers.html" class="footer-link">Centers</a><a href="contact.html" class="footer-link">Contact</a></div>
+        <div><h4 class="footer-heading">Verify</h4><a href="verify/certificate.html" class="footer-link">Certificate</a><a href="verify/marksheet.html" class="footer-link">Marksheet</a><a href="verify/student.html" class="footer-link">Student</a></div>
+        <div><h4 class="footer-heading">Contact</h4><div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Sector 18, Noida, UP</span></div><div class="footer-contact-item"><span class="footer-contact-icon">📞</span><span>+91 98765 43210</span></div><div class="footer-contact-item"><span class="footer-contact-icon">✉️</span><span>info@techproinstitute.edu.in</span></div></div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 TechPro Institute. All rights reserved.</p></div>
+    </div>
+  </footer>
+  <script src="../data/dummy.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications – Student Portal</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <style>
+    .notif-item { display: flex; gap: 1rem; padding: 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 0.75rem; transition: var(--transition); }
+    .notif-item:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); }
+    .notif-item.unread { border-left: 4px solid var(--primary); background: var(--primary-50); }
+    .notif-content { flex: 1; }
+    .notif-title { font-weight: 700; font-size: 0.975rem; color: var(--text); margin-bottom: 0.25rem; }
+    .notif-text { font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; }
+    .notif-time { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; }
+  </style>
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Student Portal</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#4c1d95,#7c3aed)">P</div><div><div class="sidebar-user-name">Priya Patel</div><div class="sidebar-user-role">ADCA &bull; Roll: R2024002</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">My Portal</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128100;</span> My Profile</a>
+      <a href="course.html" class="sidebar-link"><span class="icon">&#128218;</span> My Course</a>
+      <a href="certificate.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificate</a>
+      <a href="marksheet.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheet</a>
+      <a href="status.html" class="sidebar-link"><span class="icon">&#128203;</span> Application Status</a>
+      <a href="notifications.html" class="sidebar-link active"><span class="icon">&#128276;</span> Notifications <span class="sidebar-badge">2</span></a>
+      <div class="sidebar-section">Account</div>
+      <a href="../../pages/auth/login.html" class="sidebar-link" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a>
+    </nav>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left"><button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="topbar-title">Notifications</span></div>
+      <div class="topbar-right"><button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><div style="width:2rem;height:2rem;background:linear-gradient(135deg,#4c1d95,#7c3aed);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">P</div></div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+        <div>
+          <h1>Student Notifications</h1>
+          <p>Read class schedules, fee notices, and certificate alerts from TechPro Laxmi Nagar and HQ</p>
+        </div>
+        <button onclick="markAllRead()" class="btn btn-outline">Mark All as Read</button>
+      </div>
+
+      <div style="max-width:800px;margin:0 auto" id="notif-container">
+        <!-- Marksheet Available -->
+        <div class="notif-item unread">
+          <div style="font-size:1.5rem">📋</div>
+          <div class="notif-content">
+            <div class="notif-title">Marksheet Available!</div>
+            <div class="notif-text">Your subject-wise marksheet for ADCA term exams has been verified and issued by headquarters. You can now view and print the transcript.</div>
+            <div class="notif-time">1 hour ago</div>
+          </div>
+        </div>
+
+        <!-- Exam Schedule -->
+        <div class="notif-item unread">
+          <div style="font-size:1.5rem">📝</div>
+          <div class="notif-content">
+            <div class="notif-title">Practical Exam Scheduled</div>
+            <div class="notif-text">Your practical examination is scheduled for July 15, 2024 at 10:00 AM at TechPro Delhi center. Please bring your student identity card.</div>
+            <div class="notif-time">3 hours ago</div>
+          </div>
+        </div>
+
+        <!-- Fee Receipt -->
+        <div class="notif-item">
+          <div style="font-size:1.5rem">💳</div>
+          <div class="notif-content">
+            <div class="notif-title">Fee Receipt Generated</div>
+            <div class="notif-text">Fee receipt for June 2024 installment has been issued. Payment of ₹1,250 has been recorded successfully.</div>
+            <div class="notif-time">2 days ago</div>
+          </div>
+        </div>
+
+        <!-- Material Added -->
+        <div class="notif-item">
+          <div style="font-size:1.5rem">📕</div>
+          <div class="notif-content">
+            <div class="notif-title">New Study Material Added</div>
+            <div class="notif-text">Module 9 (HTML5 & CSS3 layout scripting) study materials and code snippets have been uploaded to your course portal.</div>
+            <div class="notif-time">5 days ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>
+    function markAllRead() {
+      document.querySelectorAll('.notif-item').forEach(item => {
+        item.classList.remove('unread');
+      });
+      // Remove badge count or set to 0
+      document.querySelector('.sidebar-badge').textContent = '0';
+      showToast('All notifications marked as read!', 'success');
+    }
+
+    document.getElementById('sidebar-overlay').addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebar-overlay').style.display='none';});
+  </script>
+</body>
+</html>

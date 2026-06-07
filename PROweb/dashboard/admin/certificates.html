@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate Approvals – Admin Dashboard</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <style>
+    .tab-btn { padding: 0.75rem 1.5rem; background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); font-weight: 600; cursor: pointer; transition: var(--transition); }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .tabs-wrapper { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; gap: 1rem; }
+  </style>
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Administrator Panel</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar">A</div><div><div class="sidebar-user-name">Dr. R.K. Sharma</div><div class="sidebar-user-role">Super Admin</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Main</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128200;</span> Dashboard</a>
+      <a href="students.html" class="sidebar-link"><span class="icon">&#127891;</span> Students</a>
+      <a href="franchise.html" class="sidebar-link"><span class="icon">&#127979;</span> Franchise Centers</a>
+      <div class="sidebar-section">Approvals</div>
+      <a href="certificates.html" class="sidebar-link active"><span class="icon">&#127942;</span> Certificates <span class="sidebar-badge" id="sidebar-cert-badge">124</span></a>
+      <a href="marksheets.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheets <span class="sidebar-badge">89</span></a>
+      <div class="sidebar-section">Management</div>
+      <a href="courses.html" class="sidebar-link"><span class="icon">&#128218;</span> Courses</a>
+      <a href="notifications.html" class="sidebar-link"><span class="icon">&#128276;</span> Notifications</a>
+      <a href="reports.html" class="sidebar-link"><span class="icon">&#128196;</span> Reports</a>
+      <div class="sidebar-section">Account</div>
+      <a href="settings.html" class="sidebar-link"><span class="icon">&#9881;&#65039;</span> Settings</a>
+    </nav>
+    <div class="sidebar-footer"><a href="../../pages/auth/login.html" class="sidebar-link" style="color:rgba(255,255,255,0.5)" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a></div>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        <span class="topbar-title">Certificate Approval Center</span>
+      </div>
+      <div class="topbar-right">
+        <button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button>
+        <div style="width:2rem;height:2rem;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">A</div>
+      </div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header">
+        <h1>Certificate Approvals</h1>
+        <p>Review and issue course completion certificates requested by franchise centers</p>
+      </div>
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:2rem">
+        <div class="stat-card"><div class="stat-icon" style="background:#dbeafe"><span>&#127942;</span></div><div class="stat-value" id="stats-total">15</div><div class="stat-label">Total Requests</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:#fef3c7"><span>&#8987;</span></div><div class="stat-value" id="stats-pending">2</div><div class="stat-label">Pending Approval</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:#d1fae5"><span>&#9989;</span></div><div class="stat-value" id="stats-approved">3</div><div class="stat-label">Approved & Issued</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:#ede9fe"><span>&#128065;</span></div><div class="stat-value">92%</div><div class="stat-label">Pass Rate Avg</div></div>
+      </div>
+      
+      <!-- Tabs -->
+      <div class="tabs-wrapper">
+        <button class="tab-btn active" onclick="switchTab('pending')">Pending Approvals (<span id="tab-pending-count">2</span>)</button>
+        <button class="tab-btn" onclick="switchTab('approved')">Approved & Issued (<span id="tab-approved-count">3</span>)</button>
+        <button class="tab-btn" onclick="switchTab('all')">All Requests (<span id="tab-all-count">5</span>)</button>
+      </div>
+
+      <!-- Toolbar -->
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem">
+        <div class="search-bar" style="flex:1;min-width:220px;max-width:360px">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" class="form-control" id="cert-search" placeholder="Search by student, ID, center...">
+        </div>
+        <select class="form-control" id="course-filter" style="max-width:180px"><option value="">All Courses</option></select>
+        <button onclick="approveAllSelected()" class="btn btn-primary" id="bulk-approve-btn">Bulk Approve Selected</button>
+      </div>
+
+      <!-- Table -->
+      <div class="card" style="padding:0">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 40px;"><input type="checkbox" id="select-all" style="width:1rem;height:1rem"></th>
+                <th>Request ID</th>
+                <th>Student</th>
+                <th>Course</th>
+                <th>Center</th>
+                <th>Request/Issue Date</th>
+                <th>Grade</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="certs-table"></tbody>
+          </table>
+        </div>
+        <div style="padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:0.875rem;color:var(--text-muted)" id="showing-text">Showing 1-2 of 2 requests</span>
+          <div class="pagination"><button class="page-btn">&#8592;</button><button class="page-btn active">1</button><button class="page-btn">&#8594;</button></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>
+    let currentTab = 'pending';
+
+    // Populate Filters
+    DATA.courses.forEach(c => {
+      const o = document.createElement('option');
+      o.value = c.name;
+      o.textContent = c.name;
+      document.getElementById('course-filter').appendChild(o);
+    });
+
+    function updateCounts() {
+      const pending = DATA.certificates.filter(c => c.status !== 'Approved');
+      const approved = DATA.certificates.filter(c => c.status === 'Approved');
+      
+      document.getElementById('stats-total').textContent = DATA.certificates.length;
+      document.getElementById('stats-pending').textContent = pending.length;
+      document.getElementById('stats-approved').textContent = approved.length;
+      
+      document.getElementById('tab-pending-count').textContent = pending.length;
+      document.getElementById('tab-approved-count').textContent = approved.length;
+      document.getElementById('tab-all-count').textContent = DATA.certificates.length;
+      
+      document.getElementById('sidebar-cert-badge').textContent = pending.length;
+    }
+
+    function renderCertificates() {
+      const tbody = document.getElementById('certs-table');
+      tbody.innerHTML = '';
+      
+      const q = document.getElementById('cert-search').value.toLowerCase();
+      const course = document.getElementById('course-filter').value;
+      
+      let list = DATA.certificates;
+      
+      // Filter by Tab
+      if (currentTab === 'pending') {
+        list = list.filter(c => c.status !== 'Approved');
+      } else if (currentTab === 'approved') {
+        list = list.filter(c => c.status === 'Approved');
+      }
+      
+      // Filter by Search
+      if (q) {
+        list = list.filter(c => 
+          c.id.toLowerCase().includes(q) || 
+          c.studentName.toLowerCase().includes(q) || 
+          c.rollNo.toLowerCase().includes(q) || 
+          c.centerName.toLowerCase().includes(q)
+        );
+      }
+      
+      // Filter by Course
+      if (course) {
+        list = list.filter(c => c.course === course);
+      }
+      
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:3rem;color:var(--text-muted)">
+          <div style="font-size:2rem;margin-bottom:0.5rem">📂</div>
+          <div>No certificate requests found in this view</div>
+        </td></tr>`;
+        document.getElementById('showing-text').textContent = `Showing 0 of 0 requests`;
+        return;
+      }
+      
+      list.forEach(c => {
+        const tr = document.createElement('tr');
+        const isApproved = c.status === 'Approved';
+        
+        tr.innerHTML = `
+          <td><input type="checkbox" value="${c.id}" class="cert-checkbox" ${isApproved ? 'disabled' : ''} style="width:1rem;height:1rem"></td>
+          <td style="font-weight:600;color:var(--primary)">${c.id}</td>
+          <td>
+            <div style="font-weight:600">${c.studentName}</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">Roll: ${c.rollNo}</div>
+          </td>
+          <td style="font-size:0.875rem">${c.course}</td>
+          <td style="font-size:0.875rem">${c.centerName}</td>
+          <td style="font-size:0.875rem">${isApproved ? c.issueDate : 'Pending Review'}</td>
+          <td><span class="badge badge-primary">${c.grade} (${c.percent}%)</span></td>
+          <td><span class="badge ${isApproved ? 'badge-success' : c.status === 'Pending' ? 'badge-warning' : 'badge-info'}">${c.status}</span></td>
+          <td>
+            <div style="display:flex;gap:0.375rem">
+              ${isApproved 
+                ? `<a href="../../pages/certificate-preview.html?id=${c.id}" target="_blank" class="btn btn-outline btn-sm" style="padding:0.25rem 0.5rem">View PDF</a>` 
+                : `<button onclick="approveCert('${c.id}')" class="btn btn-success btn-sm" style="padding:0.25rem 0.625rem;font-size:0.75rem">&#10003; Approve</button>
+                   <button onclick="rejectCert('${c.id}')" class="btn btn-danger btn-sm" style="padding:0.25rem 0.5rem;font-size:0.75rem">&#10007;</button>`
+              }
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      
+      document.getElementById('showing-text').textContent = `Showing 1-${list.length} of ${list.length} requests`;
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.getAttribute('onclick').includes(tab));
+      if (activeBtn) activeBtn.classList.add('active');
+      
+      // Toggle bulk action button visibility based on tab
+      const bulkBtn = document.getElementById('bulk-approve-btn');
+      if (tab === 'approved') {
+        bulkBtn.style.display = 'none';
+      } else {
+        bulkBtn.style.display = '';
+      }
+      
+      renderCertificates();
+    }
+
+    function approveCert(id) {
+      const idx = DATA.certificates.findIndex(c => c.id === id);
+      if (idx !== -1) {
+        DATA.certificates[idx].status = 'Approved';
+        DATA.certificates[idx].issueDate = new Date().toISOString().split('T')[0];
+        DATA.certificates[idx].expiryDate = new Date(new Date().setFullYear(new Date().getFullYear() + 5)).toISOString().split('T')[0];
+        
+        // Find student and set status to Passed
+        const stuIdx = DATA.students.findIndex(s => s.id === DATA.certificates[idx].studentId);
+        if (stuIdx !== -1) {
+          DATA.students[stuIdx].status = 'Passed';
+        }
+        
+        showToast(`Certificate ${id} approved and issued successfully!`, 'success');
+        updateCounts();
+        renderCertificates();
+      }
+    }
+
+    function rejectCert(id) {
+      if (confirm(`Are you sure you want to reject the certificate request ${id}?`)) {
+        const idx = DATA.certificates.findIndex(c => c.id === id);
+        if (idx !== -1) {
+          DATA.certificates.splice(idx, 1);
+          showToast(`Certificate request ${id} rejected and removed.`, 'danger');
+          updateCounts();
+          renderCertificates();
+        }
+      }
+    }
+
+    function approveAllSelected() {
+      const checkboxes = document.querySelectorAll('.cert-checkbox:checked');
+      if (checkboxes.length === 0) {
+        showToast('Please select at least one certificate request.', 'warning');
+        return;
+      }
+      
+      let count = 0;
+      checkboxes.forEach(cb => {
+        const id = cb.value;
+        const idx = DATA.certificates.findIndex(c => c.id === id);
+        if (idx !== -1 && DATA.certificates[idx].status !== 'Approved') {
+          DATA.certificates[idx].status = 'Approved';
+          DATA.certificates[idx].issueDate = new Date().toISOString().split('T')[0];
+          DATA.certificates[idx].expiryDate = new Date(new Date().setFullYear(new Date().getFullYear() + 5)).toISOString().split('T')[0];
+          const stuIdx = DATA.students.findIndex(s => s.id === DATA.certificates[idx].studentId);
+          if (stuIdx !== -1) {
+            DATA.students[stuIdx].status = 'Passed';
+          }
+          count++;
+        }
+      });
+      
+      showToast(`Successfully approved ${count} certificates!`, 'success');
+      document.getElementById('select-all').checked = false;
+      updateCounts();
+      renderCertificates();
+    }
+
+    // Select all logic
+    document.getElementById('select-all').addEventListener('change', function() {
+      const checked = this.checked;
+      document.querySelectorAll('.cert-checkbox').forEach(cb => {
+        if (!cb.disabled) cb.checked = checked;
+      });
+    });
+
+    document.getElementById('cert-search').addEventListener('input', renderCertificates);
+    document.getElementById('course-filter').addEventListener('change', renderCertificates);
+
+    // Initial load
+    updateCounts();
+    renderCertificates();
+
+    document.getElementById('sidebar-overlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').style.display = 'none';
+    });
+  </script>
+</body>
+</html>

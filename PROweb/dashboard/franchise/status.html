@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Status – Franchise Dashboard</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <style>
+    .status-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .status-info { flex: 1; min-width: 250px; }
+    .status-timeline { margin-top: 1rem; display: flex; gap: 1.5rem; position: relative; padding-top: 0.5rem; }
+    .status-timeline::before { content: ''; position: absolute; top: 1.15rem; left: 0.75rem; right: 0.75rem; height: 2px; background: var(--border); z-index: 1; }
+    .step { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; position: relative; z-index: 2; }
+    .step-dot { width: 1.25rem; height: 1.25rem; border-radius: 50%; background: var(--bg); border: 2px solid var(--text-muted); margin-bottom: 0.25rem; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: bold; }
+    .step.active .step-dot { border-color: var(--primary); background: var(--primary); color: #fff; }
+    .step.completed .step-dot { border-color: var(--success); background: var(--success); color: #fff; }
+    .step-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
+    .step.active .step-label { color: var(--primary); }
+    .step.completed .step-label { color: var(--text); }
+  </style>
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Franchise Center</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#059669,#10b981)">R</div><div><div class="sidebar-user-name">Rajesh Verma</div><div class="sidebar-user-role">TechPro Noida (FC001)</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Center Management</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128200;</span> Dashboard</a>
+      <a href="students.html" class="sidebar-link"><span class="icon">&#127891;</span> My Students <span class="sidebar-badge">342</span></a>
+      <a href="add-student.html" class="sidebar-link"><span class="icon">&#43;</span> Add Student</a>
+      <a href="documents.html" class="sidebar-link"><span class="icon">&#128196;</span> Documents</a>
+      <div class="sidebar-section">Applications</div>
+      <a href="certificates.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificate Apply</a>
+      <a href="marksheets.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheet Apply</a>
+      <a href="status.html" class="sidebar-link active"><span class="icon">&#128203;</span> Application Status</a>
+      <div class="sidebar-section">Finance</div>
+      <a href="payments.html" class="sidebar-link"><span class="icon">&#128176;</span> Payment History</a>
+      <div class="sidebar-section">Account</div>
+      <a href="../../pages/auth/login.html" class="sidebar-link" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a>
+    </nav>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left"><button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="topbar-title">Application Tracker</span></div>
+      <div class="topbar-right"><button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><div style="width:2rem;height:2rem;background:linear-gradient(135deg,#059669,#10b981);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">R</div></div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header">
+        <h1>Application Status Tracker</h1>
+        <p>Monitor the verification and approval stages of submitted certificate and marksheet applications</p>
+      </div>
+
+      <!-- Filters -->
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem">
+        <select class="form-control" id="type-filter" style="max-width:180px"><option value="">All Types</option><option value="Certificate">Certificate</option><option value="Marksheet">Marksheet</option></select>
+        <select class="form-control" id="status-filter" style="max-width:180px"><option value="">All Statuses</option><option value="Approved">Approved</option><option value="Pending">Pending</option></select>
+      </div>
+
+      <!-- Lists -->
+      <div id="status-list-container"></div>
+    </div>
+  </main>
+
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>
+    function renderStatusTracker() {
+      const container = document.getElementById('status-list-container');
+      container.innerHTML = '';
+      
+      const type = document.getElementById('type-filter').value;
+      const status = document.getElementById('status-filter').value;
+      
+      // We will compile a list of requests by this center
+      const certs = DATA.certificates.filter(c => c.centerName === 'TechPro Noida').map(c => ({
+        id: c.id,
+        name: c.studentName,
+        rollNo: c.rollNo,
+        type: 'Certificate',
+        course: c.course,
+        date: c.issueDate || 'Requested',
+        status: c.status
+      }));
+      
+      const marksheets = DATA.marksheets.filter(m => m.centerName === 'TechPro Noida').map(m => ({
+        id: m.id,
+        name: m.studentName,
+        rollNo: m.rollNo,
+        type: 'Marksheet',
+        course: m.course,
+        date: m.issueDate || 'Requested',
+        status: m.status
+      }));
+      
+      let list = [...certs, ...marksheets];
+      
+      if (type) list = list.filter(x => x.type === type);
+      if (status) {
+        if (status === 'Approved') list = list.filter(x => x.status === 'Approved');
+        else list = list.filter(x => x.status !== 'Approved');
+      }
+      
+      if (list.length === 0) {
+        container.innerHTML = `<div class="card" style="text-align:center;padding:4rem;color:var(--text-muted)">
+          <div style="font-size:2.5rem;margin-bottom:0.5rem">📂</div>
+          <h3>No requests matching filters</h3>
+        </div>`;
+        return;
+      }
+      
+      list.forEach(x => {
+        const div = document.createElement('div');
+        div.className = 'status-card';
+        
+        const isApproved = x.status === 'Approved';
+        const isUnderReview = x.status === 'Under Review';
+        
+        const step1Class = "completed";
+        const step2Class = isApproved || isUnderReview ? "completed" : "active";
+        const step3Class = isApproved ? "completed" : isUnderReview ? "active" : "";
+        
+        div.innerHTML = `
+          <div class="status-info">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.375rem">
+              <span class="badge badge-primary">${x.type}</span>
+              <span style="font-weight:700;font-size:0.95rem;color:var(--primary)">${x.id}</span>
+            </div>
+            <h3 style="font-weight:700;font-size:1.1rem;margin-bottom:0.25rem">${x.name}</h3>
+            <p style="font-size:0.8rem;color:var(--text-muted)">Roll No: ${x.rollNo} | Course: ${x.course}</p>
+            <div class="status-timeline">
+              <div class="step ${step1Class}">
+                <div class="step-dot">✓</div>
+                <div class="step-label">Requested</div>
+              </div>
+              <div class="step ${step2Class}">
+                <div class="step-dot">${isApproved || isUnderReview ? '✓' : '2'}</div>
+                <div class="step-label">Verification</div>
+              </div>
+              <div class="step ${step3Class}">
+                <div class="step-dot">${isApproved ? '✓' : '3'}</div>
+                <div class="step-label">HQ Approved</div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:right;min-width:140px">
+            <span class="badge ${isApproved ? 'badge-success' : 'badge-warning'}" style="margin-bottom:0.5rem">${x.status}</span>
+            <div style="font-size:0.75rem;color:var(--text-muted)">Status Date: ${x.date}</div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    renderStatusTracker();
+    document.getElementById('type-filter').addEventListener('change', renderStatusTracker);
+    document.getElementById('status-filter').addEventListener('change', renderStatusTracker);
+
+    document.getElementById('sidebar-overlay').addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebar-overlay').style.display='none';});
+  </script>
+</body>
+</html>

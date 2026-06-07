@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard – TechPro Institute</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Student Portal</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#4c1d95,#7c3aed)">P</div><div><div class="sidebar-user-name">Priya Patel</div><div class="sidebar-user-role">ADCA &bull; Roll: R2024002</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">My Portal</div>
+      <a href="index.html" class="sidebar-link active"><span class="icon">&#128100;</span> My Profile</a>
+      <a href="course.html" class="sidebar-link"><span class="icon">&#128218;</span> My Course</a>
+      <a href="certificate.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificate</a>
+      <a href="marksheet.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheet</a>
+      <a href="status.html" class="sidebar-link"><span class="icon">&#128203;</span> Application Status</a>
+      <a href="notifications.html" class="sidebar-link"><span class="icon">&#128276;</span> Notifications <span class="sidebar-badge">2</span></a>
+      <div class="sidebar-section">Account</div>
+      <a href="../../pages/auth/login.html" class="sidebar-link" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a>
+    </nav>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left"><button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="topbar-title">Student Dashboard</span></div>
+      <div class="topbar-right"><button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><button class="topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg><div class="notif-dot"></div></button><div style="width:2rem;height:2rem;background:linear-gradient(135deg,#4c1d95,#7c3aed);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">P</div></div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header"><h1>Welcome, Priya! &#127891;</h1><p>Track your courses, certificates, and academic progress</p></div>
+
+      <!-- Profile Card + Stats -->
+      <div class="grid-2" style="margin-bottom:2rem">
+        <!-- Profile -->
+        <div class="card" style="padding:2rem">
+          <div style="display:flex;gap:1.5rem;align-items:center;margin-bottom:1.5rem">
+            <div style="width:5rem;height:5rem;background:linear-gradient(135deg,#4c1d95,#7c3aed);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;color:#fff;flex-shrink:0">P</div>
+            <div>
+              <h2 style="font-size:1.375rem;font-weight:800">Priya Patel</h2>
+              <div style="color:var(--primary);font-weight:600;margin-bottom:0.25rem">ADCA &bull; Active</div>
+              <div style="font-size:0.875rem;color:var(--text-muted)">Student ID: STU002 &bull; Roll: R2024002</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+            <div style="background:var(--bg-2);border-radius:var(--radius);padding:0.875rem">
+              <div style="font-size:0.75rem;color:var(--text-muted);font-weight:600">CENTER</div>
+              <div style="font-weight:600;font-size:0.875rem;margin-top:0.25rem">TechPro Delhi</div>
+            </div>
+            <div style="background:var(--bg-2);border-radius:var(--radius);padding:0.875rem">
+              <div style="font-size:0.75rem;color:var(--text-muted);font-weight:600">ADMISSION DATE</div>
+              <div style="font-weight:600;font-size:0.875rem;margin-top:0.25rem">2024-01-12</div>
+            </div>
+            <div style="background:var(--bg-2);border-radius:var(--radius);padding:0.875rem">
+              <div style="font-size:0.75rem;color:var(--text-muted);font-weight:600">MOBILE</div>
+              <div style="font-weight:600;font-size:0.875rem;margin-top:0.25rem">9876543202</div>
+            </div>
+            <div style="background:var(--bg-2);border-radius:var(--radius);padding:0.875rem">
+              <div style="font-size:0.75rem;color:var(--text-muted);font-weight:600">STATUS</div>
+              <span class="badge badge-success" style="margin-top:0.25rem;display:inline-flex">Active</span>
+            </div>
+          </div>
+          <div style="margin-top:1.25rem;display:flex;gap:0.75rem">
+            <button onclick="showToast('Edit profile feature coming soon!','info')" class="btn btn-outline btn-sm">&#9998; Edit Profile</button>
+            <button onclick="showToast('ID card download coming soon!','info')" class="btn btn-primary btn-sm">&#128196; Download ID Card</button>
+          </div>
+        </div>
+        <!-- Academics -->
+        <div class="card" style="padding:1.5rem">
+          <h3 style="font-weight:700;margin-bottom:1.25rem">&#128200; Academic Performance</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+            <div style="background:linear-gradient(135deg,var(--primary-50),#dbeafe);border-radius:var(--radius-lg);padding:1.25rem;text-align:center">
+              <div style="font-size:2rem;font-weight:900;color:var(--primary)">90%</div>
+              <div style="font-size:0.8rem;color:var(--text-muted)">Overall Score</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#d1fae5,#a7f3d0);border-radius:var(--radius-lg);padding:1.25rem;text-align:center">
+              <div style="font-size:2rem;font-weight:900;color:var(--success)">A+</div>
+              <div style="font-size:0.8rem;color:var(--text-muted)">Grade</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:var(--radius-lg);padding:1.25rem;text-align:center">
+              <div style="font-size:2rem;font-weight:900;color:var(--accent)">88</div>
+              <div style="font-size:0.8rem;color:var(--text-muted)">Theory Marks</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#ede9fe,#c4b5fd);border-radius:var(--radius-lg);padding:1.25rem;text-align:center">
+              <div style="font-size:2rem;font-weight:900;color:#7c3aed">92</div>
+              <div style="font-size:0.8rem;color:var(--text-muted)">Practical Marks</div>
+            </div>
+          </div>
+          <div style="background:var(--bg-2);border-radius:var(--radius-lg);padding:1.25rem">
+            <div style="display:flex;justify-content:space-between;font-size:0.875rem;margin-bottom:0.5rem"><span style="font-weight:600">Course Progress</span><span style="color:var(--primary);font-weight:700">72%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
+            <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem">9 of 12.5 months completed (ADCA)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Links + Notifications -->
+      <div class="grid-2">
+        <!-- Quick Access -->
+        <div class="card" style="padding:1.5rem">
+          <h3 style="font-weight:700;margin-bottom:1.25rem">&#9889; Quick Access</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+            <a href="certificate.html" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1.25rem;background:var(--primary-50);border-radius:var(--radius-lg);color:var(--primary);font-weight:600;font-size:0.875rem;text-align:center;transition:var(--transition)" onmouseover="this.style.background='var(--primary)';this.style.color='#fff'" onmouseout="this.style.background='var(--primary-50)';this.style.color='var(--primary)'"><span style="font-size:1.75rem">&#127942;</span>My Certificate</a>
+            <a href="marksheet.html" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1.25rem;background:#d1fae5;border-radius:var(--radius-lg);color:#065f46;font-weight:600;font-size:0.875rem;text-align:center;transition:var(--transition)" onmouseover="this.style.background='#059669';this.style.color='#fff'" onmouseout="this.style.background='#d1fae5';this.style.color='#065f46'"><span style="font-size:1.75rem">&#128203;</span>My Marksheet</a>
+            <a href="course.html" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1.25rem;background:#fef3c7;border-radius:var(--radius-lg);color:#92400e;font-weight:600;font-size:0.875rem;text-align:center;transition:var(--transition)" onmouseover="this.style.background='#f59e0b';this.style.color='#fff'" onmouseout="this.style.background='#fef3c7';this.style.color='#92400e'"><span style="font-size:1.75rem">&#128218;</span>My Course</a>
+            <a href="status.html" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;padding:1.25rem;background:#ede9fe;border-radius:var(--radius-lg);color:#4c1d95;font-weight:600;font-size:0.875rem;text-align:center;transition:var(--transition)" onmouseover="this.style.background='#7c3aed';this.style.color='#fff'" onmouseout="this.style.background='#ede9fe';this.style.color='#4c1d95'"><span style="font-size:1.75rem">&#128203;</span>App Status</a>
+          </div>
+        </div>
+        <!-- Notifications -->
+        <div class="card">
+          <div class="card-header"><h3 style="font-weight:700">&#128276; Notifications</h3><span class="badge badge-primary">2 new</span></div>
+          <div style="padding:0.5rem">
+            <div class="notification-item unread"><div class="notification-dot"></div><div class="notification-content"><div class="notification-title">Marksheet Available!</div><div class="notification-text">Your ADCA marksheet has been approved and is ready for download.</div><div class="notification-time">1 hour ago</div></div></div>
+            <div class="notification-item unread"><div class="notification-dot"></div><div class="notification-content"><div class="notification-title">Practical Exam Scheduled</div><div class="notification-text">Your practical examination is scheduled for July 15, 2024 at TechPro Delhi.</div><div class="notification-time">3 hours ago</div></div></div>
+            <div class="notification-item"><div style="width:0.625rem"></div><div class="notification-content"><div class="notification-title">Fee Receipt Generated</div><div class="notification-text">Fee receipt for June 2024 has been generated. Download from payment section.</div><div class="notification-time">2 days ago</div></div></div>
+            <div class="notification-item"><div style="width:0.625rem"></div><div class="notification-content"><div class="notification-title">New Study Material Added</div><div class="notification-text">Module 9 study materials for ADCA have been uploaded to the portal.</div><div class="notification-time">5 days ago</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>document.getElementById('sidebar-overlay').addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebar-overlay').style.display='none';});</script>
+</body>
+</html>

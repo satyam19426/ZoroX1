@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enroll Student – Franchise Dashboard</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Franchise Center</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#059669,#10b981)">R</div><div><div class="sidebar-user-name">Rajesh Verma</div><div class="sidebar-user-role">TechPro Noida (FC001)</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Center Management</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128200;</span> Dashboard</a>
+      <a href="students.html" class="sidebar-link"><span class="icon">&#127891;</span> My Students <span class="sidebar-badge">342</span></a>
+      <a href="add-student.html" class="sidebar-link active"><span class="icon">&#43;</span> Add Student</a>
+      <a href="documents.html" class="sidebar-link"><span class="icon">&#128196;</span> Documents</a>
+      <div class="sidebar-section">Applications</div>
+      <a href="certificates.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificate Apply</a>
+      <a href="marksheets.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheet Apply</a>
+      <a href="status.html" class="sidebar-link"><span class="icon">&#128203;</span> Application Status</a>
+      <div class="sidebar-section">Finance</div>
+      <a href="payments.html" class="sidebar-link"><span class="icon">&#128176;</span> Payment History</a>
+      <div class="sidebar-section">Account</div>
+      <a href="../../pages/auth/login.html" class="sidebar-link" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a>
+    </nav>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left"><button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="topbar-title">Enroll Student</span></div>
+      <div class="topbar-right"><button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><div style="width:2rem;height:2rem;background:linear-gradient(135deg,#059669,#10b981);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">R</div></div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header">
+        <h1>Register New Student</h1>
+        <p>Enroll a new student directly under the TechPro Noida franchise branch (FC001)</p>
+      </div>
+
+      <div class="card" style="max-width:800px;margin:0 auto;padding:2.5rem">
+        <form onsubmit="submitEnrolment(event)">
+          <h3 style="font-weight:700;font-size:1.2rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:0.5rem">👤 Personal Profile Details</h3>
+          <div class="form-grid">
+            <div class="form-group"><label class="form-label">Student Full Name *</label><input type="text" class="form-control" required placeholder="e.g. Rahul Verma" id="e-name"></div>
+            <div class="form-group"><label class="form-label">Date of Birth *</label><input type="date" class="form-control" required id="e-dob"></div>
+            <div class="form-group"><label class="form-label">Mobile Number (WhatsApp) *</label><input type="tel" class="form-control" required placeholder="9812345678" id="e-phone"></div>
+            <div class="form-group"><label class="form-label">Email Address *</label><input type="email" class="form-control" required placeholder="rahul@email.com" id="e-email"></div>
+            <div class="form-group">
+              <label class="form-label">Gender *</label>
+              <select class="form-control" required id="e-gender">
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Father's Name *</label><input type="text" class="form-control" required placeholder="Father's full name" id="e-father"></div>
+          </div>
+
+          <h3 style="font-weight:700;font-size:1.2rem;margin-top:2rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:0.5rem">🎓 Course Enrollment & Address</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Choose Course *</label>
+              <select class="form-control" required id="e-course">
+                <option value="">Select Course</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Admission Date *</label><input type="date" class="form-control" required id="e-date"></div>
+          </div>
+          <div class="form-group" style="margin-top:1rem"><label class="form-label">Full Address *</label><textarea class="form-control" rows="3" required placeholder="Student complete home address" id="e-address"></textarea></div>
+
+          <div style="display:flex;justify-content:flex-end;gap:1rem;margin-top:2rem;border-top:1px solid var(--border);padding-top:1.5rem">
+            <a href="students.html" class="btn btn-outline">Cancel & Return</a>
+            <button type="submit" class="btn btn-primary">Enroll & Generate Roll No</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>
+    // Populate Courses
+    DATA.courses.forEach(c => {
+      const o = document.createElement('option');
+      o.value = c.code;
+      o.textContent = `${c.name} (${c.code})`;
+      document.getElementById('e-course').appendChild(o);
+    });
+
+    // Default Date to Today
+    document.getElementById('e-date').value = new Date().toISOString().split('T')[0];
+
+    function submitEnrolment(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.textContent = 'Enrolling Student...';
+      
+      setTimeout(() => {
+        const name = document.getElementById('e-name').value;
+        const dob = document.getElementById('e-dob').value;
+        const mobile = document.getElementById('e-phone').value;
+        const email = document.getElementById('e-email').value;
+        const gender = document.getElementById('e-gender').value;
+        const course = document.getElementById('e-course').value;
+        const date = document.getElementById('e-date').value;
+        const address = document.getElementById('e-address').value;
+        
+        // Synthesize ID & Roll No
+        const newId = "STU0" + (DATA.students.length + 1);
+        const rollNo = "R" + new Date().getFullYear() + "00" + (DATA.students.length + 1);
+        
+        const newStu = {
+          id: newId,
+          rollNo: rollNo,
+          name: name,
+          dob: dob,
+          gender: gender,
+          mobile: mobile,
+          email: email,
+          course: course,
+          centerId: 'FC001',
+          centerName: 'TechPro Noida',
+          admissionDate: date,
+          status: 'Active',
+          address: address,
+          marks: { theory: 0, practical: 0, total: 0, max: 200, percent: 0, grade: 'N/A' }
+        };
+        
+        DATA.students.push(newStu);
+        
+        showToast(`Student ${name} successfully enrolled! Roll No: ${rollNo}`, 'success');
+        
+        setTimeout(() => {
+          window.location.href = 'students.html';
+        }, 1200);
+      }, 1500);
+    }
+
+    document.getElementById('sidebar-overlay').addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebar-overlay').style.display='none';});
+  </script>
+</body>
+</html>

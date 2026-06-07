@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Status – Student Portal</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <style>
+    .status-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; }
+    .status-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .timeline { display: flex; position: relative; margin-top: 1.5rem; gap: 1rem; }
+    .timeline::before { content: ''; position: absolute; top: 1.15rem; left: 0.75rem; right: 0.75rem; height: 2px; background: var(--border); z-index: 1; }
+    .timeline-step { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; position: relative; z-index: 2; }
+    .timeline-dot { width: 1.25rem; height: 1.25rem; border-radius: 50%; background: var(--bg); border: 2px solid var(--text-muted); margin-bottom: 0.25rem; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: bold; }
+    .timeline-step.active .timeline-dot { border-color: var(--primary); background: var(--primary); color: #fff; }
+    .timeline-step.completed .timeline-dot { border-color: var(--success); background: var(--success); color: #fff; }
+    .timeline-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
+    .timeline-step.active .timeline-label { color: var(--primary); }
+    .timeline-step.completed .timeline-label { color: var(--text); }
+  </style>
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Student Portal</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#4c1d95,#7c3aed)">P</div><div><div class="sidebar-user-name">Priya Patel</div><div class="sidebar-user-role">ADCA &bull; Roll: R2024002</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">My Portal</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128100;</span> My Profile</a>
+      <a href="course.html" class="sidebar-link"><span class="icon">&#128218;</span> My Course</a>
+      <a href="certificate.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificate</a>
+      <a href="marksheet.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheet</a>
+      <a href="status.html" class="sidebar-link active"><span class="icon">&#128203;</span> Application Status</a>
+      <a href="notifications.html" class="sidebar-link"><span class="icon">&#128276;</span> Notifications <span class="sidebar-badge">2</span></a>
+      <div class="sidebar-section">Account</div>
+      <a href="../../pages/auth/login.html" class="sidebar-link" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a>
+    </nav>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left"><button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="topbar-title">Application Status</span></div>
+      <div class="topbar-right"><button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><div style="width:2rem;height:2rem;background:linear-gradient(135deg,#4c1d95,#7c3aed);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">P</div></div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header">
+        <h1>Document Application Status</h1>
+        <p>Monitor verification stages, grading reviews, and approval checks for your academic transcripts</p>
+      </div>
+
+      <!-- Marksheet Status -->
+      <div class="status-card">
+        <div class="status-header">
+          <div>
+            <span class="badge badge-success">Approved</span>
+            <span style="font-weight:700;margin-left:0.5rem;color:var(--primary)">#MRK2024006</span>
+          </div>
+          <div style="font-size:0.8rem;color:var(--text-muted)">Issued: 2024-06-04</div>
+        </div>
+        <h3 style="font-weight:700;font-size:1.1rem;margin-bottom:0.25rem">Official Marksheet Approval</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted)">Exam score data has been compiled, verified, and issued by HQ.</p>
+        <div class="timeline">
+          <div class="timeline-step completed">
+            <div class="timeline-dot">✓</div>
+            <div class="timeline-label">Drafted by Center</div>
+          </div>
+          <div class="timeline-step completed">
+            <div class="timeline-dot">✓</div>
+            <div class="timeline-label">Grade Validation</div>
+          </div>
+          <div class="timeline-step completed">
+            <div class="timeline-dot">✓</div>
+            <div class="timeline-label">HQ Authorized</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certificate Status -->
+      <div class="status-card">
+        <div class="status-header">
+          <div>
+            <span class="badge badge-gray">Awaiting Course Completion</span>
+            <span style="font-weight:700;margin-left:0.5rem;color:var(--text-muted)">#CERT-AWAITING</span>
+          </div>
+          <div style="font-size:0.8rem;color:var(--text-muted)">Target: Jan 2025</div>
+        </div>
+        <h3 style="font-weight:700;font-size:1.1rem;margin-bottom:0.25rem">Official Certificate Approvals</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted)">Certificate will trigger automatically when the course reaches 100% completion checklist.</p>
+        <div class="timeline">
+          <div class="timeline-step completed">
+            <div class="timeline-dot">✓</div>
+            <div class="timeline-label">Enrolled</div>
+          </div>
+          <div class="timeline-step active">
+            <div class="timeline-dot">2</div>
+            <div class="timeline-label">Studies in Progress</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-dot">3</div>
+            <div class="timeline-label">Completion Review</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>document.getElementById('sidebar-overlay').addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebar-overlay').style.display='none';});</script>
+</body>
+</html>

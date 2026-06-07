@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses – TechPro Institute</title>
+  <meta name="description" content="Browse 48+ professional computer courses at TechPro Institute. DCA, ADCA, Tally, Web Development, Python, Graphic Design and more.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    .filter-bar { display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:2rem; }
+    .filter-btn { padding:0.5rem 1.25rem; border-radius:9999px; font-size:0.875rem; font-weight:600; border:1.5px solid var(--border); color:var(--text-muted); transition:var(--transition); background:var(--bg); }
+    .filter-btn:hover,.filter-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+    .courses-count { font-size:0.9rem; color:var(--text-muted); margin-bottom:1.5rem; }
+  </style>
+</head>
+<body>
+  <nav id="navbar"><div class="container"><div class="navbar-inner"><a href="../index.html" class="logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div><div>TechPro<span style="color:var(--accent)"> Institute</span></div></a><div class="nav-links"><a href="../index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a><a href="courses.html" class="nav-link active">Courses</a><a href="verify/certificate.html" class="nav-link">Verify</a><a href="franchise.html" class="nav-link">Franchise</a><a href="centers.html" class="nav-link">Centers</a><a href="contact.html" class="nav-link">Contact</a></div><div class="nav-actions"><button class="dark-toggle" title="Dark Mode"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><a href="auth/login.html" class="btn btn-outline btn-sm">Login</a><a href="auth/register.html" class="btn btn-primary btn-sm">Register</a><button class="hamburger"><span></span><span></span><span></span></button></div></div></div></nav>
+  <div class="mobile-nav"><div class="mobile-nav-header"><a href="../index.html" class="logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</a><button class="mobile-nav-close" style="width:2.5rem;height:2.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);font-size:1.5rem">×</button></div><div class="mobile-nav-links"><a href="../index.html" class="mobile-nav-link">🏠 Home</a><a href="about.html" class="mobile-nav-link">ℹ️ About</a><a href="courses.html" class="mobile-nav-link">📚 Courses</a><a href="franchise.html" class="mobile-nav-link">🏢 Franchise</a><a href="contact.html" class="mobile-nav-link">📞 Contact</a><a href="auth/login.html" class="mobile-nav-link">🔐 Login</a></div></div>
+
+  <section class="page-hero">
+    <div class="container page-hero-content" style="text-align:center">
+      <h1>Our Courses</h1>
+      <p>48+ professionally designed programs to launch and advance your career in technology</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Search + Filter -->
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:2rem;">
+        <div class="search-bar" style="flex:1;min-width:260px;max-width:420px">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" class="form-control" id="course-search" placeholder="Search courses...">
+        </div>
+        <div class="filter-bar" style="margin-bottom:0;">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="Diploma">Diploma</button>
+          <button class="filter-btn" data-filter="Programming">Programming</button>
+          <button class="filter-btn" data-filter="Accounting">Accounting</button>
+          <button class="filter-btn" data-filter="Design">Design</button>
+          <button class="filter-btn" data-filter="Certificate">Certificate</button>
+        </div>
+      </div>
+      <div class="courses-count" id="courses-count"></div>
+      <div class="grid-auto" id="courses-grid"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;padding:4rem 0;text-align:center">
+    <div class="container">
+      <h2 style="font-size:2rem;font-weight:800;margin-bottom:1rem">Can't Find the Right Course?</h2>
+      <p style="opacity:0.85;margin-bottom:2rem">Contact us for a free career counseling session. Our experts will guide you to the perfect course.</p>
+      <a href="contact.html" class="btn btn-accent btn-lg">Get Free Counseling</a>
+    </div>
+  </section>
+
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="../index.html" class="logo" style="margin-bottom:1rem"><div class="logo-icon" style="background:linear-gradient(135deg,var(--primary),var(--accent))"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro Institute</a><p class="footer-desc">Empowering careers since 2010.</p></div><div><h4 class="footer-heading">Quick Links</h4><a href="about.html" class="footer-link">About Us</a><a href="franchise.html" class="footer-link">Franchise</a><a href="centers.html" class="footer-link">Centers</a><a href="contact.html" class="footer-link">Contact</a></div><div><h4 class="footer-heading">Verify</h4><a href="verify/certificate.html" class="footer-link">Certificate</a><a href="verify/marksheet.html" class="footer-link">Marksheet</a><a href="verify/student.html" class="footer-link">Student</a></div><div><h4 class="footer-heading">Contact</h4><div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Sector 18, Noida, UP</span></div><div class="footer-contact-item"><span class="footer-contact-icon">📞</span><span>+91 98765 43210</span></div></div></div><div class="footer-bottom"><p>© 2024 TechPro Institute. All rights reserved.</p></div></div></footer>
+
+  <script src="../data/dummy.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script>
+    const icons = {DCA:'💻',ADCA:'🖥️',TALLY:'📊',WD:'🌐',PY:'🐍',GD:'🎨',DTP:'📰',CCC:'📋',CYBER:'🔒',VIDEO:'🎬'};
+    const catColors = {Diploma:'linear-gradient(135deg,#1e3a8a,#1a56db)',Programming:'linear-gradient(135deg,#064e3b,#10b981)',Accounting:'linear-gradient(135deg,#78350f,#f59e0b)',Design:'linear-gradient(135deg,#4c1d95,#8b5cf6)',Certificate:'linear-gradient(135deg,#831843,#ec4899)','IT Security':'linear-gradient(135deg,#1c1917,#57534e)',Multimedia:'linear-gradient(135deg,#0c4a6e,#38bdf8)'};
+    let allCourses = DATA.courses;
+    let activeFilter = 'all';
+
+    function renderCourses(courses) {
+      const grid = document.getElementById('courses-grid');
+      const count = document.getElementById('courses-count');
+      count.textContent = `Showing ${courses.length} courses`;
+      grid.innerHTML = '';
+      if (!courses.length) {
+        grid.innerHTML = '<div class="empty-state"><div class="empty-state-icon" style="font-size:3rem">📚</div><h3>No courses found</h3><p>Try a different search or filter.</p></div>';
+        return;
+      }
+      courses.forEach(course => {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        card.dataset.name = course.name;
+        card.dataset.cat = course.category;
+        card.innerHTML = `
+          <div class="course-card-image" style="background:${catColors[course.category]||'linear-gradient(135deg,#1e3a8a,#1a56db)'}">
+            <span style="font-size:3rem;position:relative;z-index:1">${icons[course.code]||'📚'}</span>
+            ${course.popular?'<span class="badge badge-warning course-card-badge">🔥 Popular</span>':''}
+          </div>
+          <div class="course-card-body">
+            <div class="course-card-code">${course.code}</div>
+            <h3 class="course-card-title">${course.name}</h3>
+            <p class="course-card-desc">${course.description}</p>
+            <div class="course-card-meta">
+              <span class="course-card-meta-item">⏱️ ${course.duration}</span>
+              <span class="course-card-meta-item">📊 ${course.level}</span>
+              <span class="course-card-meta-item">🏷️ ${course.category}</span>
+            </div>
+            <div style="margin-bottom:1rem">
+              <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.375rem">Syllabus: ${course.syllabus.slice(0,3).join(', ')}${course.syllabus.length>3?' & more..':''}</div>
+              <div class="progress-bar"><div class="progress-fill" style="width:${Math.round(course.enrolled/course.seats*100)}%"></div></div>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem">${course.enrolled}/${course.seats} seats filled</div>
+            </div>
+            <div class="course-card-footer">
+              <div><div class="course-fee-label">Course Fee</div><div class="course-fee">₹${course.fee.toLocaleString('en-IN')}</div></div>
+              <a href="auth/register.html" class="btn btn-primary btn-sm">Enroll Now</a>
+            </div>
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    renderCourses(allCourses);
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        filterAndRender();
+      });
+    });
+
+    // Search
+    document.getElementById('course-search').addEventListener('input', filterAndRender);
+
+    function filterAndRender() {
+      const q = document.getElementById('course-search').value.toLowerCase();
+      let filtered = allCourses;
+      if (activeFilter !== 'all') filtered = filtered.filter(c => c.category === activeFilter);
+      if (q) filtered = filtered.filter(c => c.name.toLowerCase().includes(q) || c.code.toLowerCase().includes(q) || c.description.toLowerCase().includes(q));
+      renderCourses(filtered);
+    }
+
+    // URL param filter
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('cat')) {
+      const cat = params.get('cat');
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.filter.toLowerCase() === cat) { btn.classList.add('active'); activeFilter = btn.dataset.filter; }
+      });
+      filterAndRender();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Franchise Centers – TechPro Institute</title>
+  <meta name="description" content="Find TechPro Institute franchise centers near you. 320+ centers across 24 states in India.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <nav id="navbar"><div class="container"><div class="navbar-inner"><a href="../index.html" class="logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div><div>TechPro<span style="color:var(--accent)"> Institute</span></div></a><div class="nav-links"><a href="../index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a><a href="courses.html" class="nav-link">Courses</a><a href="franchise.html" class="nav-link">Franchise</a><a href="centers.html" class="nav-link active">Centers</a><a href="contact.html" class="nav-link">Contact</a></div><div class="nav-actions"><button class="dark-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><a href="auth/login.html" class="btn btn-primary btn-sm">Login</a><button class="hamburger"><span></span><span></span><span></span></button></div></div></div></nav>
+  <div class="mobile-nav"><div class="mobile-nav-header"><span class="logo">TechPro</span><button class="mobile-nav-close" style="width:2.5rem;height:2.5rem;border-radius:50%;border:1px solid var(--border);font-size:1.5rem">&times;</button></div><div class="mobile-nav-links"><a href="../index.html" class="mobile-nav-link">Home</a><a href="courses.html" class="mobile-nav-link">Courses</a><a href="franchise.html" class="mobile-nav-link">Franchise</a></div></div>
+
+  <section class="page-hero"><div class="container page-hero-content" style="text-align:center"><h1>Franchise Centers</h1><p>320+ TechPro centers across 24 states. Find one near you!</p></div></section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Search -->
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:2rem">
+        <div class="search-bar" style="flex:1;min-width:250px;max-width:400px">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" class="form-control" id="center-search" placeholder="Search by city, state, or center name...">
+        </div>
+        <select class="form-control" id="state-filter" style="max-width:220px">
+          <option value="">All States</option>
+        </select>
+        <select class="form-control" id="status-filter" style="max-width:180px">
+          <option value="">All Status</option>
+          <option value="Active">Active</option>
+          <option value="Pending">Pending</option>
+        </select>
+      </div>
+      <div class="grid-auto" id="centers-grid"></div>
+      <div id="no-centers" class="empty-state" style="display:none">
+        <div class="empty-state-icon" style="font-size:3rem">&#128205;</div>
+        <h3>No Centers Found</h3>
+        <p>Try a different search term or state filter.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;padding:4rem 0;text-align:center">
+    <div class="container">
+      <h2 style="font-size:2rem;font-weight:800;margin-bottom:1rem">Don't See a Center in Your City?</h2>
+      <p style="opacity:0.85;margin-bottom:2rem">Open a TechPro franchise center and serve your community while building a profitable business!</p>
+      <a href="franchise.html" class="btn btn-accent btn-lg">&#127962; Apply for Franchise</a>
+    </div>
+  </section>
+
+  <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="../index.html" class="logo" style="margin-bottom:1rem"><div class="logo-icon" style="background:linear-gradient(135deg,var(--primary),var(--accent))"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro Institute</a><p class="footer-desc">Empowering careers since 2010.</p></div><div><h4 class="footer-heading">Quick Links</h4><a href="about.html" class="footer-link">About</a><a href="courses.html" class="footer-link">Courses</a><a href="franchise.html" class="footer-link">Franchise</a><a href="contact.html" class="footer-link">Contact</a></div><div><h4 class="footer-heading">Verify</h4><a href="verify/certificate.html" class="footer-link">Certificate</a><a href="verify/marksheet.html" class="footer-link">Marksheet</a></div><div><h4 class="footer-heading">Contact</h4><div class="footer-contact-item"><span>&#128205;</span><span>Noida, UP</span></div><div class="footer-contact-item"><span>&#128222;</span><span>+91 98765 43210</span></div></div></div><div class="footer-bottom"><p>&copy; 2024 TechPro Institute. All rights reserved.</p></div></div></footer>
+
+  <script src="../data/dummy.js"></script><script src="../assets/js/main.js"></script>
+  <script>
+    // Populate state filter
+    const states = [...new Set(DATA.franchiseCenters.map(c => c.state))];
+    const stateFilter = document.getElementById('state-filter');
+    states.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; stateFilter.appendChild(o); });
+
+    function renderCenters(centers) {
+      const grid = document.getElementById('centers-grid');
+      const noEl = document.getElementById('no-centers');
+      grid.innerHTML = '';
+      if (!centers.length) { noEl.style.display = 'block'; return; }
+      noEl.style.display = 'none';
+      centers.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'franchise-card';
+        const stars = '&#9733;'.repeat(Math.floor(c.rating)) + (c.rating % 1 ? '&#9734;' : '');
+        card.innerHTML = `
+          <div class="franchise-header">
+            <div class="franchise-icon">&#127979;</div>
+            <div>
+              <div class="franchise-name">${c.name}</div>
+              <div class="franchise-owner">Owner: ${c.owner}</div>
+            </div>
+          </div>
+          <div style="font-size:0.875rem;color:var(--text-muted);margin-bottom:0.75rem">&#128205; ${c.address}</div>
+          <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:0.75rem">
+            <span class="badge ${c.status==='Active'?'badge-success':'badge-warning'}">${c.status}</span>
+            <span class="rating">${stars} ${c.rating}</span>
+            <span style="font-size:0.8rem;color:var(--text-muted)">Since ${c.established.split('-')[0]}</span>
+          </div>
+          <div class="franchise-stats">
+            <div class="franchise-stat-item"><div class="franchise-stat-val">${c.students}</div><div class="franchise-stat-lbl">Students</div></div>
+            <div class="franchise-stat-item"><div class="franchise-stat-val">${c.courses}</div><div class="franchise-stat-lbl">Courses</div></div>
+            <div class="franchise-stat-item"><div class="franchise-stat-val">${c.code}</div><div class="franchise-stat-lbl">Code</div></div>
+          </div>
+          <div style="display:flex;gap:0.5rem;margin-top:0.75rem">
+            <a href="tel:${c.mobile}" class="btn btn-outline btn-sm" style="flex:1;justify-content:center">&#128222; Call</a>
+            <a href="mailto:${c.email}" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">&#9993; Email</a>
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+    renderCenters(DATA.franchiseCenters);
+
+    function filterCenters() {
+      const q = document.getElementById('center-search').value.toLowerCase();
+      const state = document.getElementById('state-filter').value;
+      const status = document.getElementById('status-filter').value;
+      let filtered = DATA.franchiseCenters;
+      if (q) filtered = filtered.filter(c => c.name.toLowerCase().includes(q) || c.city.toLowerCase().includes(q) || c.state.toLowerCase().includes(q) || c.owner.toLowerCase().includes(q));
+      if (state) filtered = filtered.filter(c => c.state === state);
+      if (status) filtered = filtered.filter(c => c.status === status);
+      renderCenters(filtered);
+    }
+    document.getElementById('center-search').addEventListener('input', filterCenters);
+    document.getElementById('state-filter').addEventListener('change', filterCenters);
+    document.getElementById('status-filter').addEventListener('change', filterCenters);
+  </script>
+</body>
+</html>

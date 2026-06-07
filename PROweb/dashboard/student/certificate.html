@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Certificate – Student Portal</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <style>
+    .criteria-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 0.75rem; background: var(--bg); }
+    .criteria-label { font-weight: 600; font-size: 0.9rem; }
+    .criteria-check { font-size: 1.15rem; }
+  </style>
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Student Portal</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#4c1d95,#7c3aed)">P</div><div><div class="sidebar-user-name">Priya Patel</div><div class="sidebar-user-role">ADCA &bull; Roll: R2024002</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">My Portal</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128100;</span> My Profile</a>
+      <a href="course.html" class="sidebar-link"><span class="icon">&#128218;</span> My Course</a>
+      <a href="certificate.html" class="sidebar-link active"><span class="icon">&#127942;</span> Certificate</a>
+      <a href="marksheet.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheet</a>
+      <a href="status.html" class="sidebar-link"><span class="icon">&#128203;</span> Application Status</a>
+      <a href="notifications.html" class="sidebar-link"><span class="icon">&#128276;</span> Notifications <span class="sidebar-badge">2</span></a>
+      <div class="sidebar-section">Account</div>
+      <a href="../../pages/auth/login.html" class="sidebar-link" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a>
+    </nav>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left"><button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="topbar-title">Certificate Status</span></div>
+      <div class="topbar-right"><button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><div style="width:2rem;height:2rem;background:linear-gradient(135deg,#4c1d95,#7c3aed);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">P</div></div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header">
+        <h1>Course Completion Certificate</h1>
+        <p>View completion criteria and download official certificate once issued by HQ</p>
+      </div>
+
+      <div class="grid-2" style="grid-template-columns: 1.5fr 1fr; align-items: flex-start;">
+        <!-- Left: Certificate Details & Preview Card -->
+        <div>
+          <!-- Certificate Status Banner -->
+          <div class="card" style="padding:2rem;margin-bottom:1.5rem;text-align:center;border-left:4px solid var(--warning)">
+            <div style="font-size:2.5rem;margin-bottom:0.5rem">⏳</div>
+            <h2 style="font-weight:800;font-size:1.375rem;margin-bottom:0.5rem">Certificate Status: Awaiting Completion</h2>
+            <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:1.5rem;max-width:480px;margin-left:auto;margin-right:auto">Your certificate has not been issued yet because your course is still in progress (72% complete). Complete the required modules to apply.</p>
+            <button onclick="previewDemoCert()" class="btn btn-outline btn-sm">Preview Draft Certificate</button>
+          </div>
+        </div>
+
+        <!-- Right: Requirements Check -->
+        <div class="card" style="padding:1.5rem">
+          <h3 style="font-weight:700;font-size:1.1rem;margin-bottom:1.25rem">Issuance Eligibility Checklist</h3>
+          <div class="criteria-item">
+            <div>
+              <div class="criteria-label">Course Duration Completed</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">Requires 12 months (9/12 complete)</div>
+            </div>
+            <span class="criteria-check" style="color:var(--warning)">⏳</span>
+          </div>
+          <div class="criteria-item">
+            <div>
+              <div class="criteria-label">Term Examinations Cleared</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">Passing score required (90% score achieved)</div>
+            </div>
+            <span class="criteria-check" style="color:var(--success)">✓</span>
+          </div>
+          <div class="criteria-item">
+            <div>
+              <div class="criteria-label">Tuition Fee Account Balanced</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">Requires zero outstanding balance</div>
+            </div>
+            <span class="criteria-check" style="color:var(--success)">✓</span>
+          </div>
+          <div class="criteria-item">
+            <div>
+              <div class="criteria-label">Headquarters Verification</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">Final validation of center records</div>
+            </div>
+            <span class="criteria-check" style="color:var(--text-muted)">➖</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>
+    function previewDemoCert() {
+      // Direct user to certificate-preview.html with a mock template
+      showToast('Generating draft layout...', 'info');
+      setTimeout(() => {
+        window.open('../../pages/certificate-preview.html?id=CERT-DRAFT-PRIA', '_blank');
+      }, 1000);
+    }
+
+    document.getElementById('sidebar-overlay').addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebar-overlay').style.display='none';});
+  </script>
+</body>
+</html>

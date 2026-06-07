@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate Preview – TechPro Institute</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body style="background:var(--bg-2);min-height:100vh">
+  <nav id="navbar"><div class="container"><div class="navbar-inner"><a href="../index.html" class="logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div><div>TechPro<span style="color:var(--accent)"> Institute</span></div></a><div class="nav-actions"><button class="dark-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button></div></div></div></nav>
+
+  <div style="padding:3rem 1rem" class="no-print">
+    <div style="max-width:800px;margin:0 auto">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem">
+        <div>
+          <h1 style="font-size:1.5rem;font-weight:800">Certificate Preview</h1>
+          <p style="color:var(--text-muted)">CERT2024001 &bull; Rohit Kumar</p>
+        </div>
+        <div style="display:flex;gap:0.75rem">
+          <button onclick="window.print()" class="btn btn-outline">&#128424; Print</button>
+          <button onclick="showToast('PDF download coming soon!','info')" class="btn btn-primary">&#128196; Download PDF</button>
+          <a href="verify/certificate.html" class="btn btn-ghost">&#8592; Back</a>
+        </div>
+      </div>
+
+      <!-- CERTIFICATE -->
+      <div class="certificate" id="certificate-print">
+        <div class="cert-logo">&#127942;</div>
+        <div class="cert-org">TechPro Institute of Computer Education</div>
+        <div style="font-size:0.8rem;color:#9ca3af;margin-bottom:1rem">ISO 9001:2015 Certified | NIELIT Recognized | Est. 2010</div>
+        <div class="cert-title">Certificate</div>
+        <div class="cert-subtitle">of Completion</div>
+        <div style="width:80px;height:3px;background:linear-gradient(90deg,#1a56db,#f59e0b);margin:1rem auto 2rem"></div>
+        <div class="cert-recipient">This is to certify that</div>
+        <div class="cert-name">Rohit Kumar</div>
+        <div class="cert-for">has successfully completed the course of</div>
+        <div class="cert-course">Tally Prime with GST</div>
+        <div style="font-size:0.9rem;color:#6b7280;margin-bottom:2rem">with a score of <strong>77%</strong> (Grade: <strong>B+</strong>) in the examination held at<br><strong>TechPro Noida Center</strong> in the year <strong>2023</strong></div>
+        <div class="cert-footer">
+          <div class="cert-sign">
+            <div style="font-style:italic;font-size:1.25rem;color:#1a56db;margin-bottom:0.5rem">R.K. Sharma</div>
+            <div class="cert-sign-line"></div>
+            <div class="cert-sign-name">Dr. R.K. Sharma</div>
+            <div class="cert-sign-title">Founder & CEO</div>
+          </div>
+          <div class="cert-id">
+            <div class="qr-placeholder" style="margin:0 auto">&#128939;<br>QR Code<br><small>CERT2024001</small></div>
+            <div style="margin-top:0.5rem">Certificate No: <strong>CERT2024001</strong></div>
+            <div>Issue Date: <strong>15-01-2024</strong></div>
+          </div>
+          <div class="cert-sign">
+            <div style="font-style:italic;font-size:1.25rem;color:#1a56db;margin-bottom:0.5rem">S. Arora</div>
+            <div class="cert-sign-line"></div>
+            <div class="cert-sign-name">Dr. Sunita Arora</div>
+            <div class="cert-sign-title">Academic Director</div>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid #e5e7eb;font-size:0.75rem;color:#9ca3af">
+          Verify this certificate at: www.techproinstitute.edu.in/verify | Certificate ID: CERT2024001
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../data/dummy.js"></script><script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marksheet Approvals – Admin Dashboard</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <style>
+    .tab-btn { padding: 0.75rem 1.5rem; background: none; border: none; border-bottom: 2px solid transparent; color: var(--text-muted); font-weight: 600; cursor: pointer; transition: var(--transition); }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+    .tabs-wrapper { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; gap: 1rem; }
+    .sub-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+    .sub-table th, .sub-table td { padding: 0.375rem 0.75rem; border: 1px solid var(--border); font-size: 0.75rem; }
+    .sub-table th { background: var(--bg-2); font-weight: 600; }
+  </style>
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Administrator Panel</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar">A</div><div><div class="sidebar-user-name">Dr. R.K. Sharma</div><div class="sidebar-user-role">Super Admin</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Main</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128200;</span> Dashboard</a>
+      <a href="students.html" class="sidebar-link"><span class="icon">&#127891;</span> Students</a>
+      <a href="franchise.html" class="sidebar-link"><span class="icon">&#127979;</span> Franchise Centers</a>
+      <div class="sidebar-section">Approvals</div>
+      <a href="certificates.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificates <span class="sidebar-badge">124</span></a>
+      <a href="marksheets.html" class="sidebar-link active"><span class="icon">&#128203;</span> Marksheets <span class="sidebar-badge" id="sidebar-marks-badge">89</span></a>
+      <div class="sidebar-section">Management</div>
+      <a href="courses.html" class="sidebar-link"><span class="icon">&#128218;</span> Courses</a>
+      <a href="notifications.html" class="sidebar-link"><span class="icon">&#128276;</span> Notifications</a>
+      <a href="reports.html" class="sidebar-link"><span class="icon">&#128196;</span> Reports</a>
+      <div class="sidebar-section">Account</div>
+      <a href="settings.html" class="sidebar-link"><span class="icon">&#9881;&#65039;</span> Settings</a>
+    </nav>
+    <div class="sidebar-footer"><a href="../../pages/auth/login.html" class="sidebar-link" style="color:rgba(255,255,255,0.5)" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a></div>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        <span class="topbar-title">Marksheet Approval Center</span>
+      </div>
+      <div class="topbar-right">
+        <button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button>
+        <div style="width:2rem;height:2rem;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">A</div>
+      </div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header">
+        <h1>Marksheet Approvals</h1>
+        <p>Review subject-wise marks submissions and approve official digital marksheets</p>
+      </div>
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:2rem">
+        <div class="stat-card"><div class="stat-icon" style="background:#dbeafe"><span>&#128203;</span></div><div class="stat-value" id="stats-total">15</div><div class="stat-label">Total Requests</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:#fef3c7"><span>&#8987;</span></div><div class="stat-value" id="stats-pending">2</div><div class="stat-label">Pending Approval</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:#d1fae5"><span>&#9989;</span></div><div class="stat-value" id="stats-approved">3</div><div class="stat-label">Approved Marksheets</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:#ede9fe"><span>📊</span></div><div class="stat-value">72.1%</div><div class="stat-label">Average Score</div></div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs-wrapper">
+        <button class="tab-btn active" onclick="switchTab('pending')">Pending Approvals (<span id="tab-pending-count">2</span>)</button>
+        <button class="tab-btn" onclick="switchTab('approved')">Approved Marksheets (<span id="tab-approved-count">3</span>)</button>
+        <button class="tab-btn" onclick="switchTab('all')">All Requests (<span id="tab-all-count">5</span>)</button>
+      </div>
+
+      <!-- Toolbar -->
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem">
+        <div class="search-bar" style="flex:1;min-width:220px;max-width:360px">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" class="form-control" id="marks-search" placeholder="Search by student, roll no, center...">
+        </div>
+        <select class="form-control" id="course-filter" style="max-width:180px"><option value="">All Courses</option></select>
+        <button onclick="approveAllSelected()" class="btn btn-primary" id="bulk-approve-btn">Bulk Approve Selected</button>
+      </div>
+
+      <!-- Table -->
+      <div class="card" style="padding:0">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 40px;"><input type="checkbox" id="select-all" style="width:1rem;height:1rem"></th>
+                <th>Marksheet ID</th>
+                <th>Student</th>
+                <th>Course</th>
+                <th>Franchise Center</th>
+                <th>Subject-wise Marks</th>
+                <th>Result Summary</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="marksheets-table"></tbody>
+          </table>
+        </div>
+        <div style="padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:0.875rem;color:var(--text-muted)" id="showing-text">Showing 1-2 of 2 marksheets</span>
+          <div class="pagination"><button class="page-btn">&#8592;</button><button class="page-btn active">1</button><button class="page-btn">&#8594;</button></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>
+    let currentTab = 'pending';
+
+    // Populate Filters
+    DATA.courses.forEach(c => {
+      const o = document.createElement('option');
+      o.value = c.name;
+      o.textContent = c.name;
+      document.getElementById('course-filter').appendChild(o);
+    });
+
+    // We need to synthesize pending marksheet requests because dummy.js only has approved marksheets
+    // Let's create two pending marksheet requests based on students who don't have marksheets yet
+    const pendingRequests = [
+      {
+        id: "MRK2024004",
+        studentId: "STU001",
+        studentName: "Aarav Sharma",
+        rollNo: "R2024001",
+        course: "Diploma in Computer Applications",
+        centerName: "TechPro Noida",
+        issueDate: null,
+        status: "Pending",
+        subjects: [
+          { name: "MS Office Suite", maxMarks: 100, obtained: 82, grade: "A" },
+          { name: "Internet & Basic Coding", maxMarks: 100, obtained: 81, grade: "A" }
+        ],
+        total: 163,
+        maxTotal: 200,
+        percent: 81.5,
+        result: "Pass",
+        grade: "A"
+      },
+      {
+        id: "MRK2024005",
+        studentId: "STU004",
+        studentName: "Sneha Singh",
+        rollNo: "R2024003",
+        course: "Web Development",
+        centerName: "TechPro Agra",
+        issueDate: null,
+        status: "Pending",
+        subjects: [
+          { name: "Frontend Development", maxMarks: 100, obtained: 92, grade: "A+" },
+          { name: "Backend Development", maxMarks: 100, obtained: 94, grade: "A+" }
+        ],
+        total: 186,
+        maxTotal: 200,
+        percent: 93,
+        result: "Pass",
+        grade: "A+"
+      }
+    ];
+
+    // Combine existing marksheets and our synthesized pending ones
+    let allMarksheets = [...pendingRequests, ...DATA.marksheets];
+
+    function updateCounts() {
+      const pending = allMarksheets.filter(m => m.status !== 'Approved');
+      const approved = allMarksheets.filter(m => m.status === 'Approved');
+      
+      document.getElementById('stats-total').textContent = allMarksheets.length;
+      document.getElementById('stats-pending').textContent = pending.length;
+      document.getElementById('stats-approved').textContent = approved.length;
+      
+      document.getElementById('tab-pending-count').textContent = pending.length;
+      document.getElementById('tab-approved-count').textContent = approved.length;
+      document.getElementById('tab-all-count').textContent = allMarksheets.length;
+      
+      document.getElementById('sidebar-marks-badge').textContent = pending.length;
+    }
+
+    function renderMarksheets() {
+      const tbody = document.getElementById('marksheets-table');
+      tbody.innerHTML = '';
+      
+      const q = document.getElementById('marks-search').value.toLowerCase();
+      const course = document.getElementById('course-filter').value;
+      
+      let list = allMarksheets;
+      
+      // Tab filter
+      if (currentTab === 'pending') {
+        list = list.filter(m => m.status !== 'Approved');
+      } else if (currentTab === 'approved') {
+        list = list.filter(m => m.status === 'Approved');
+      }
+      
+      // Search filter
+      if (q) {
+        list = list.filter(m => 
+          m.id.toLowerCase().includes(q) || 
+          m.studentName.toLowerCase().includes(q) || 
+          m.rollNo.toLowerCase().includes(q) || 
+          m.centerName.toLowerCase().includes(q)
+        );
+      }
+      
+      // Course filter
+      if (course) {
+        list = list.filter(m => m.course === course);
+      }
+      
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:3rem;color:var(--text-muted)">
+          <div style="font-size:2rem;margin-bottom:0.5rem">📂</div>
+          <div>No marksheet requests found in this view</div>
+        </td></tr>`;
+        document.getElementById('showing-text').textContent = `Showing 0 of 0 requests`;
+        return;
+      }
+      
+      list.forEach(m => {
+        const tr = document.createElement('tr');
+        const isApproved = m.status === 'Approved';
+        
+        let subjectsHtml = `<table class="sub-table">
+          <thead><tr><th>Subject</th><th>Obtained</th><th>Max</th><th>Grade</th></tr></thead>
+          <tbody>`;
+        m.subjects.forEach(s => {
+          subjectsHtml += `<tr><td>${s.name}</td><td><strong>${s.obtained}</strong></td><td>${s.maxMarks}</td><td>${s.grade}</td></tr>`;
+        });
+        subjectsHtml += `</tbody></table>`;
+        
+        tr.innerHTML = `
+          <td><input type="checkbox" value="${m.id}" class="marks-checkbox" ${isApproved ? 'disabled' : ''} style="width:1rem;height:1rem"></td>
+          <td style="font-weight:600;color:var(--primary)">${m.id}</td>
+          <td>
+            <div style="font-weight:600">${m.studentName}</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">Roll: ${m.rollNo}</div>
+          </td>
+          <td style="font-size:0.875rem">${m.course}</td>
+          <td style="font-size:0.875rem">${m.centerName}</td>
+          <td style="width: 320px;">${subjectsHtml}</td>
+          <td>
+            <div style="font-weight:700;font-size:0.9rem">${m.total}/${m.maxTotal}</div>
+            <div style="font-size:0.8rem;color:var(--primary);font-weight:600">${m.percent}% (Grade: ${m.grade})</div>
+            <div style="font-size:0.75rem;color:${m.result==='Pass'?'var(--success)':'var(--danger)'};font-weight:bold">${m.result.toUpperCase()}</div>
+          </td>
+          <td><span class="badge ${isApproved ? 'badge-success' : 'badge-warning'}">${m.status}</span></td>
+          <td>
+            <div style="display:flex;gap:0.375rem">
+              ${isApproved 
+                ? `<button onclick="showToast('Downloading marksheet PDF...','info')" class="btn btn-outline btn-sm">PDF</button>` 
+                : `<button onclick="approveMarksheet('${m.id}')" class="btn btn-success btn-sm" style="padding:0.25rem 0.625rem;font-size:0.75rem">&#10003; Approve</button>
+                   <button onclick="rejectMarksheet('${m.id}')" class="btn btn-danger btn-sm" style="padding:0.25rem 0.5rem;font-size:0.75rem">&#10007;</button>`
+              }
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      
+      document.getElementById('showing-text').textContent = `Showing 1-${list.length} of ${list.length} requests`;
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.getAttribute('onclick').includes(tab));
+      if (activeBtn) activeBtn.classList.add('active');
+      
+      // Toggle bulk action button visibility based on tab
+      const bulkBtn = document.getElementById('bulk-approve-btn');
+      if (tab === 'approved') {
+        bulkBtn.style.display = 'none';
+      } else {
+        bulkBtn.style.display = '';
+      }
+      
+      renderMarksheets();
+    }
+
+    function approveMarksheet(id) {
+      const idx = allMarksheets.findIndex(m => m.id === id);
+      if (idx !== -1) {
+        allMarksheets[idx].status = 'Approved';
+        allMarksheets[idx].issueDate = new Date().toISOString().split('T')[0];
+        
+        // Also push it back into DATA.marksheets if it's not already there
+        if (!DATA.marksheets.find(x => x.id === id)) {
+          DATA.marksheets.push(allMarksheets[idx]);
+        }
+        
+        showToast(`Marksheet ${id} approved and finalized!`, 'success');
+        updateCounts();
+        renderMarksheets();
+      }
+    }
+
+    function rejectMarksheet(id) {
+      if (confirm(`Are you sure you want to reject and delete marksheet request ${id}?`)) {
+        const idx = allMarksheets.findIndex(m => m.id === id);
+        if (idx !== -1) {
+          allMarksheets.splice(idx, 1);
+          
+          // Also remove from DATA.marksheets if present
+          const dataIdx = DATA.marksheets.findIndex(x => x.id === id);
+          if (dataIdx !== -1) DATA.marksheets.splice(dataIdx, 1);
+          
+          showToast(`Marksheet request ${id} deleted.`, 'danger');
+          updateCounts();
+          renderMarksheets();
+        }
+      }
+    }
+
+    function approveAllSelected() {
+      const checkboxes = document.querySelectorAll('.marks-checkbox:checked');
+      if (checkboxes.length === 0) {
+        showToast('Please select at least one marksheet request.', 'warning');
+        return;
+      }
+      
+      let count = 0;
+      checkboxes.forEach(cb => {
+        const id = cb.value;
+        const idx = allMarksheets.findIndex(m => m.id === id);
+        if (idx !== -1 && allMarksheets[idx].status !== 'Approved') {
+          allMarksheets[idx].status = 'Approved';
+          allMarksheets[idx].issueDate = new Date().toISOString().split('T')[0];
+          
+          if (!DATA.marksheets.find(x => x.id === id)) {
+            DATA.marksheets.push(allMarksheets[idx]);
+          }
+          count++;
+        }
+      });
+      
+      showToast(`Successfully approved ${count} marksheets!`, 'success');
+      document.getElementById('select-all').checked = false;
+      updateCounts();
+      renderMarksheets();
+    }
+
+    // Select all logic
+    document.getElementById('select-all').addEventListener('change', function() {
+      const checked = this.checked;
+      document.querySelectorAll('.marks-checkbox').forEach(cb => {
+        if (!cb.disabled) cb.checked = checked;
+      });
+    });
+
+    document.getElementById('marks-search').addEventListener('input', renderMarksheets);
+    document.getElementById('course-filter').addEventListener('change', renderMarksheets);
+
+    // Initial load
+    updateCounts();
+    renderMarksheets();
+
+    document.getElementById('sidebar-overlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').style.display = 'none';
+    });
+  </script>
+</body>
+</html>

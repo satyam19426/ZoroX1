@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Documents – Franchise Dashboard</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <style>
+    .upload-zone { border: 2px dashed var(--border); border-radius: var(--radius-lg); padding: 2rem; text-align: center; background: var(--bg-2); cursor: pointer; transition: var(--transition); margin-bottom: 1.5rem; }
+    .upload-zone:hover { border-color: var(--primary); background: var(--primary-50); }
+    .upload-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .doc-row { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 0.5rem; background: var(--bg); }
+    .doc-name { font-weight: 600; font-size: 0.875rem; }
+    .doc-status { font-size: 0.75rem; font-weight: 700; }
+  </style>
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Franchise Center</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#059669,#10b981)">R</div><div><div class="sidebar-user-name">Rajesh Verma</div><div class="sidebar-user-role">TechPro Noida (FC001)</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Center Management</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128200;</span> Dashboard</a>
+      <a href="students.html" class="sidebar-link"><span class="icon">&#127891;</span> My Students <span class="sidebar-badge">342</span></a>
+      <a href="add-student.html" class="sidebar-link"><span class="icon">&#43;</span> Add Student</a>
+      <a href="documents.html" class="sidebar-link active"><span class="icon">&#128196;</span> Documents</a>
+      <div class="sidebar-section">Applications</div>
+      <a href="certificates.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificate Apply</a>
+      <a href="marksheets.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheet Apply</a>
+      <a href="status.html" class="sidebar-link"><span class="icon">&#128203;</span> Application Status</a>
+      <div class="sidebar-section">Finance</div>
+      <a href="payments.html" class="sidebar-link"><span class="icon">&#128176;</span> Payment History</a>
+      <div class="sidebar-section">Account</div>
+      <a href="../../pages/auth/login.html" class="sidebar-link" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a>
+    </nav>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left"><button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="topbar-title">Student Documentation</span></div>
+      <div class="topbar-right"><button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><div style="width:2rem;height:2rem;background:linear-gradient(135deg,#059669,#10b981);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">R</div></div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header">
+        <h1>Student Registration Documents</h1>
+        <p>Upload and verify student onboarding documents for compliance review</p>
+      </div>
+
+      <div class="grid-2" style="grid-template-columns: 1fr 1.2fr; align-items: flex-start;">
+        <!-- Left: Student List -->
+        <div class="card" style="padding:1.5rem">
+          <h3 style="font-weight:700;font-size:1.1rem;margin-bottom:1rem">Select Student</h3>
+          <div class="search-bar" style="margin-bottom:1rem">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" class="form-control" id="stu-search" placeholder="Search student...">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;max-height:360px;overflow-y:auto" id="students-list"></div>
+        </div>
+
+        <!-- Right: Upload Panel -->
+        <div class="card" style="padding:2rem">
+          <div id="no-selection-panel" style="text-align:center;padding:4rem 2rem;color:var(--text-muted)">
+            <div style="font-size:3rem;margin-bottom:1rem">📄</div>
+            <h3 style="font-weight:700">No Student Selected</h3>
+            <p style="font-size:0.875rem">Select a student from the sidebar to manage their documents</p>
+          </div>
+
+          <div id="upload-panel" style="display:none">
+            <h3 style="font-weight:700;font-size:1.2rem;margin-bottom:0.25rem" id="selected-stu-name">Rahul Verma</h3>
+            <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:1.5rem" id="selected-stu-details">Roll: R2024001 | Course: DCA</p>
+            
+            <div class="upload-zone" onclick="triggerFileSelect()">
+              <div class="upload-icon">📥</div>
+              <div style="font-weight:700;font-size:1rem;margin-bottom:0.25rem">Drag & Drop Documents Here</div>
+              <div style="font-size:0.8rem;color:var(--text-muted)">Accepts PDF, JPG, PNG (Max 5MB)</div>
+              <input type="file" id="file-input" style="display:none" onchange="handleFileChange(this)">
+            </div>
+
+            <h4 style="font-weight:700;font-size:0.95rem;margin-bottom:0.75rem">Onboarding Checklist</h4>
+            <div class="doc-row">
+              <div>
+                <div class="doc-name">Passport Sized Photo</div>
+                <div style="font-size:0.7rem;color:var(--text-muted)">Required for Identity Card & Marksheet</div>
+              </div>
+              <span class="badge badge-success doc-status">Uploaded</span>
+            </div>
+            <div class="doc-row">
+              <div>
+                <div class="doc-name">Aadhaar Card (National ID)</div>
+                <div style="font-size:0.7rem;color:var(--text-muted)">Required for registration verification</div>
+              </div>
+              <span class="badge badge-success doc-status">Uploaded</span>
+            </div>
+            <div class="doc-row">
+              <div>
+                <div class="doc-name">Qualifying Academic Marksheet (10th/12th)</div>
+                <div style="font-size:0.7rem;color:var(--text-muted)">Required for eligibility verification</div>
+              </div>
+              <span class="badge badge-warning doc-status" id="acad-status">Missing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>
+    let selectedStuId = null;
+
+    function renderStudentsList() {
+      const container = document.getElementById('students-list');
+      container.innerHTML = '';
+      
+      const q = document.getElementById('stu-search').value.toLowerCase();
+      
+      const list = DATA.students.filter(s => s.centerId === 'FC001');
+      const filtered = q ? list.filter(s => s.name.toLowerCase().includes(q) || s.rollNo.toLowerCase().includes(q)) : list;
+      
+      filtered.forEach(s => {
+        const btn = document.createElement('button');
+        btn.className = `btn btn-ghost`;
+        btn.style.cssText = 'width:100%;text-align:left;padding:0.75rem 1rem;justify-content:flex-start;border:1px solid var(--border);margin-bottom:0.25rem;border-radius:var(--radius)';
+        if (s.id === selectedStuId) {
+          btn.style.background = 'var(--primary-50)';
+          btn.style.borderColor = 'var(--primary-light)';
+        }
+        
+        btn.innerHTML = `
+          <div>
+            <div style="font-weight:700;color:var(--text)">${s.name}</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">Roll: ${s.rollNo} | ${s.course}</div>
+          </div>
+        `;
+        
+        btn.onclick = () => selectStudent(s);
+        container.appendChild(btn);
+      });
+    }
+
+    renderStudentsList();
+    document.getElementById('stu-search').addEventListener('input', renderStudentsList);
+
+    function selectStudent(stu) {
+      selectedStuId = stu.id;
+      renderStudentsList();
+      
+      document.getElementById('no-selection-panel').style.display = 'none';
+      document.getElementById('upload-panel').style.display = 'block';
+      
+      document.getElementById('selected-stu-name').textContent = stu.name;
+      document.getElementById('selected-stu-details').textContent = `Roll No: ${stu.rollNo} | Course: ${stu.course}`;
+      
+      // Simulate status check: Aarav Sharma has all docs uploaded, Priya Patel is missing academic
+      if (stu.id === 'STU001') {
+        document.getElementById('acad-status').textContent = 'Uploaded';
+        document.getElementById('acad-status').className = 'badge badge-success doc-status';
+      } else {
+        document.getElementById('acad-status').textContent = 'Missing';
+        document.getElementById('acad-status').className = 'badge badge-warning doc-status';
+      }
+    }
+
+    function triggerFileSelect() {
+      document.getElementById('file-input').click();
+    }
+
+    function handleFileChange(input) {
+      if (input.files.length > 0) {
+        showToast(`Uploading ${input.files[0].name}...`, 'info');
+        setTimeout(() => {
+          document.getElementById('acad-status').textContent = 'Uploaded';
+          document.getElementById('acad-status').className = 'badge badge-success doc-status';
+          showToast('Document uploaded successfully & sent for review!', 'success');
+        }, 1500);
+      }
+    }
+
+    document.getElementById('sidebar-overlay').addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebar-overlay').style.display='none';});
+  </script>
+</body>
+</html>

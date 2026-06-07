@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics & Reports – Admin Dashboard</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <style>
+    .chart-container { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 1.5rem; margin-bottom: 1.5rem; }
+    .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .chart-title { font-weight: 700; font-size: 1.1rem; }
+    .report-download-card { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); transition: var(--transition); }
+    .report-download-card:hover { box-shadow: var(--shadow-sm); border-color: var(--primary-light); }
+  </style>
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Administrator Panel</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar">A</div><div><div class="sidebar-user-name">Dr. R.K. Sharma</div><div class="sidebar-user-role">Super Admin</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Main</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128200;</span> Dashboard</a>
+      <a href="students.html" class="sidebar-link"><span class="icon">&#127891;</span> Students</a>
+      <a href="franchise.html" class="sidebar-link"><span class="icon">&#127979;</span> Franchise Centers</a>
+      <div class="sidebar-section">Approvals</div>
+      <a href="certificates.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificates <span class="sidebar-badge">124</span></a>
+      <a href="marksheets.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheets <span class="sidebar-badge">89</span></a>
+      <div class="sidebar-section">Management</div>
+      <a href="courses.html" class="sidebar-link"><span class="icon">&#128218;</span> Courses</a>
+      <a href="notifications.html" class="sidebar-link"><span class="icon">&#128276;</span> Notifications</a>
+      <a href="reports.html" class="sidebar-link active"><span class="icon">&#128196;</span> Reports</a>
+      <div class="sidebar-section">Account</div>
+      <a href="settings.html" class="sidebar-link"><span class="icon">&#9881;&#65039;</span> Settings</a>
+    </nav>
+    <div class="sidebar-footer"><a href="../../pages/auth/login.html" class="sidebar-link" style="color:rgba(255,255,255,0.5)" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a></div>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        <span class="topbar-title">Performance Analytics</span>
+      </div>
+      <div class="topbar-right">
+        <button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button>
+        <div style="width:2rem;height:2rem;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">A</div>
+      </div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header">
+        <h1>Reports & Performance Analytics</h1>
+        <p>Inspect enrollment statistics, revenue growth graphs, and generate printable reports</p>
+      </div>
+
+      <!-- Filters Toolbar -->
+      <div class="card" style="padding:1rem;margin-bottom:1.5rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:0.5rem">
+          <span style="font-size:0.875rem;font-weight:600">Reporting Year:</span>
+          <select class="form-control" style="width:auto;padding:0.375rem 0.75rem" id="year-select"><option>2024 (Current)</option><option>2023</option></select>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.5rem">
+          <span style="font-size:0.875rem;font-weight:600">State Filter:</span>
+          <select class="form-control" style="width:auto;padding:0.375rem 0.75rem" id="state-select"><option value="">All States</option><option>Uttar Pradesh</option><option>Delhi</option><option>Rajasthan</option></select>
+        </div>
+        <button onclick="applyFilters()" class="btn btn-primary btn-sm">Regenerate Charts</button>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="grid-2" style="margin-bottom:1.5rem">
+        <div class="chart-container">
+          <div class="chart-header">
+            <span class="chart-title">📈 Revenue Streams (FY 2023-24)</span>
+            <span style="font-size:0.8rem;color:var(--success);font-weight:bold">+12.4% vs FY 22-23</span>
+          </div>
+          <div style="display:flex;justify-content:center;padding:1rem 0">
+            <canvas id="revenue-chart" width="450" height="200" style="max-width:100%"></canvas>
+          </div>
+        </div>
+        <div class="chart-container">
+          <div class="chart-header">
+            <span class="chart-title">📊 Enrollment Milestones (Monthly)</span>
+            <span style="font-size:0.8rem;color:var(--primary);font-weight:bold">Average: 510/Mo</span>
+          </div>
+          <div style="display:flex;justify-content:center;padding:1rem 0">
+            <canvas id="enrollment-chart-canvas" width="450" height="200" style="max-width:100%"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Downloads Row -->
+      <h2 style="font-weight:800;font-size:1.25rem;margin-bottom:1rem">Print & Export Reports</h2>
+      <div class="grid-3" style="margin-bottom:2rem">
+        <div class="report-download-card">
+          <div>
+            <div style="font-weight:700;font-size:0.95rem">Admissions Log</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">Detailed listing of student admissions</div>
+          </div>
+          <button onclick="showToast('Downloading Admissions report PDF...','success')" class="btn btn-outline btn-sm">PDF</button>
+        </div>
+        <div class="report-download-card">
+          <div>
+            <div style="font-weight:700;font-size:0.95rem">Franchise Royalty Ledger</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">Share breakdown and transaction history</div>
+          </div>
+          <button onclick="showToast('Downloading Royalty Ledger XLS...','success')" class="btn btn-outline btn-sm">Excel</button>
+        </div>
+        <div class="report-download-card">
+          <div>
+            <div style="font-weight:700;font-size:0.95rem">Certificate Compliance Log</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">Issuance counts and verification records</div>
+          </div>
+          <button onclick="showToast('Downloading Compliance log PDF...','success')" class="btn btn-outline btn-sm">PDF</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>
+    function renderRevenueChart() {
+      const canvas = document.getElementById('revenue-chart');
+      if (canvas && window.renderMiniChart) {
+        // Draw larger bar chart on canvas
+        const data = DATA.adminStats.revenueData;
+        window.renderMiniChart(canvas, data, '#10b981');
+      }
+    }
+
+    function renderEnrollmentChart() {
+      const canvas = document.getElementById('enrollment-chart-canvas');
+      if (canvas && window.renderMiniChart) {
+        const data = DATA.adminStats.monthlyEnrollments;
+        window.renderMiniChart(canvas, data, '#1a56db');
+      }
+    }
+
+    // Initial render
+    setTimeout(() => {
+      renderRevenueChart();
+      renderEnrollmentChart();
+    }, 200);
+
+    function applyFilters() {
+      showToast('Recalculating reporting metrics...', 'info');
+      // Mix data for simulation
+      setTimeout(() => {
+        const rev = DATA.adminStats.revenueData.map(v => v * (0.9 + Math.random() * 0.2));
+        const enr = DATA.adminStats.monthlyEnrollments.map(v => v * (0.95 + Math.random() * 0.1));
+        
+        const canvas1 = document.getElementById('revenue-chart');
+        window.renderMiniChart(canvas1, rev, '#10b981');
+        
+        const canvas2 = document.getElementById('enrollment-chart-canvas');
+        window.renderMiniChart(canvas2, enr, '#1a56db');
+        
+        showToast('Charts updated successfully!', 'success');
+      }, 800);
+    }
+
+    document.getElementById('sidebar-overlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').style.display = 'none';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Franchises – Admin Dashboard</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Administrator Panel</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar">A</div><div><div class="sidebar-user-name">Dr. R.K. Sharma</div><div class="sidebar-user-role">Super Admin</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">Main</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128200;</span> Dashboard</a>
+      <a href="students.html" class="sidebar-link"><span class="icon">&#127891;</span> Students</a>
+      <a href="franchise.html" class="sidebar-link active"><span class="icon">&#127979;</span> Franchise Centers</a>
+      <div class="sidebar-section">Approvals</div>
+      <a href="certificates.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificates <span class="sidebar-badge">124</span></a>
+      <a href="marksheets.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheets <span class="sidebar-badge">89</span></a>
+      <div class="sidebar-section">Management</div>
+      <a href="courses.html" class="sidebar-link"><span class="icon">&#128218;</span> Courses</a>
+      <a href="notifications.html" class="sidebar-link"><span class="icon">&#128276;</span> Notifications</a>
+      <a href="reports.html" class="sidebar-link"><span class="icon">&#128196;</span> Reports</a>
+      <div class="sidebar-section">Account</div>
+      <a href="settings.html" class="sidebar-link"><span class="icon">&#9881;&#65039;</span> Settings</a>
+    </nav>
+    <div class="sidebar-footer"><a href="../../pages/auth/login.html" class="sidebar-link" style="color:rgba(255,255,255,0.5)" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a></div>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        <span class="topbar-title">Franchise Center Management</span>
+      </div>
+      <div class="topbar-right">
+        <button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button>
+        <div style="width:2rem;height:2rem;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">A</div>
+      </div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header">
+        <h1>Franchise Centers</h1>
+        <p>Monitor performance, active enrollment, ratings, and revenue streams across all partners</p>
+      </div>
+      <!-- Stats -->
+      <div class="stats-grid" style="margin-bottom:2rem">
+        <div class="stat-card"><div class="stat-icon" style="background:#dbeafe"><span>&#127979;</span></div><div class="stat-value" id="total-centers-val">320</div><div class="stat-label">Total Partners</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:#d1fae5"><span>&#9989;</span></div><div class="stat-value" id="active-centers-val">298</div><div class="stat-label">Active Centers</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:#ede9fe"><span>&#128101;</span></div><div class="stat-value">1,787</div><div class="stat-label">Total Current Students</div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:#fef3c7"><span>&#128178;</span></div><div class="stat-value">&#8377;14.1L</div><div class="stat-label">Monthly Partner Share</div></div>
+      </div>
+      <!-- Toolbar -->
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem">
+        <div class="search-bar" style="flex:1;min-width:220px;max-width:360px">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" class="form-control" id="center-search" placeholder="Search by name, owner, city...">
+        </div>
+        <select class="form-control" id="status-filter" style="max-width:160px"><option value="">All Status</option><option>Active</option><option>Pending</option></select>
+        <button data-modal-open="add-center-modal" class="btn btn-primary">&#43; Add Franchise</button>
+        <button onclick="showToast('Export feature coming soon!','info')" class="btn btn-outline">&#8595; Export List</button>
+      </div>
+      <!-- Table -->
+      <div class="card" style="padding:0">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" style="width:1rem;height:1rem"></th>
+                <th>Center details</th>
+                <th>Owner</th>
+                <th>Contact</th>
+                <th>Location</th>
+                <th>Students</th>
+                <th>Rating</th>
+                <th>Est. Revenue</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="centers-table"></tbody>
+          </table>
+        </div>
+        <div style="padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:0.875rem;color:var(--text-muted)" id="showing-text">Showing 1-8 of 8 centers</span>
+          <div class="pagination"><button class="page-btn">&#8592;</button><button class="page-btn active">1</button><button class="page-btn">&#8594;</button></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Add Center Modal -->
+  <div class="modal-overlay" id="add-center-modal">
+    <div class="modal" style="max-width:700px">
+      <div class="modal-header"><h2 class="modal-title">Create Franchise Center</h2><button class="modal-close" data-modal-close>&#10005;</button></div>
+      <div class="modal-body">
+        <form onsubmit="addCenter(event)">
+          <div class="form-grid">
+            <div class="form-group"><label class="form-label">Center Name *</label><input type="text" class="form-control" placeholder="TechPro Noida" required id="modal-name"></div>
+            <div class="form-group"><label class="form-label">Owner Name *</label><input type="text" class="form-control" placeholder="Owner Name" required id="modal-owner"></div>
+            <div class="form-group"><label class="form-label">Mobile Number *</label><input type="tel" class="form-control" placeholder="9811223344" required id="modal-mobile"></div>
+            <div class="form-group"><label class="form-label">Email Address *</label><input type="email" class="form-control" placeholder="noida@techpro.edu.in" required id="modal-email"></div>
+            <div class="form-group"><label class="form-label">City *</label><input type="text" class="form-control" required id="modal-city"></div>
+            <div class="form-group"><label class="form-label">State *</label><input type="text" class="form-control" required id="modal-state"></div>
+            <div class="form-group"><label class="form-label">Pincode *</label><input type="text" class="form-control" required id="modal-pincode"></div>
+            <div class="form-group"><label class="form-label">Date Established</label><input type="date" class="form-control" id="modal-established"></div>
+          </div>
+          <div class="form-group"><label class="form-label">Address *</label><textarea class="form-control" rows="2" required placeholder="Full physical address" id="modal-address"></textarea></div>
+          <div class="modal-footer" style="padding:0;margin-top:1rem;border:none;justify-content:flex-end">
+            <button type="button" data-modal-close class="btn btn-outline">Cancel</button>
+            <button type="submit" class="btn btn-primary">Create Center</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>
+    function renderCenters(centers) {
+      const tbody = document.getElementById('centers-table');
+      tbody.innerHTML = '';
+      
+      centers.forEach(c => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><input type="checkbox" style="width:1rem;height:1rem"></td>
+          <td>
+            <div style="font-weight:600">${c.name}</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">Code: ${c.code} (ID: ${c.id})</div>
+          </td>
+          <td style="font-size:0.875rem">${c.owner}</td>
+          <td>
+            <div style="font-size:0.875rem">${c.mobile}</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">${c.email}</div>
+          </td>
+          <td>
+            <div style="font-size:0.875rem">${c.city}</div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">${c.state}</div>
+          </td>
+          <td style="font-size:0.875rem;font-weight:600;text-align:center">${c.students}</td>
+          <td>
+            <div style="font-size:0.875rem;font-weight:700;color:var(--warning)">${c.rating} ★</div>
+          </td>
+          <td style="font-size:0.875rem;font-weight:700;color:var(--primary)">₹${c.revenue.toLocaleString('en-IN')}</td>
+          <td><span class="badge ${c.status==='Active'?'badge-success':'badge-warning'}">${c.status}</span></td>
+          <td>
+            <div style="display:flex;gap:0.375rem">
+              <button onclick="showToast('Viewing stats for ${c.name}','info')" class="btn btn-ghost btn-sm" style="padding:0.25rem 0.5rem">&#128065;</button>
+              <button onclick="showToast('Editing ${c.name}','info')" class="btn btn-ghost btn-sm" style="padding:0.25rem 0.5rem">&#9998;</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('showing-text').textContent = `Showing 1-${centers.length} of ${centers.length} centers`;
+    }
+    
+    renderCenters(DATA.franchiseCenters);
+
+    // Search and filters
+    function filterCenters() {
+      const q = document.getElementById('center-search').value.toLowerCase();
+      const status = document.getElementById('status-filter').value;
+      let filtered = DATA.franchiseCenters;
+      
+      if (q) {
+        filtered = filtered.filter(c => 
+          c.name.toLowerCase().includes(q) || 
+          c.owner.toLowerCase().includes(q) || 
+          c.city.toLowerCase().includes(q) || 
+          c.code.toLowerCase().includes(q)
+        );
+      }
+      if (status) {
+        filtered = filtered.filter(c => c.status === status);
+      }
+      renderCenters(filtered);
+    }
+
+    document.getElementById('center-search').addEventListener('input', filterCenters);
+    document.getElementById('status-filter').addEventListener('change', filterCenters);
+
+    function addCenter(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type=submit]');
+      btn.textContent = 'Creating...';
+      
+      setTimeout(() => {
+        const name = document.getElementById('modal-name').value;
+        const owner = document.getElementById('modal-owner').value;
+        const mobile = document.getElementById('modal-mobile').value;
+        const email = document.getElementById('modal-email').value;
+        const city = document.getElementById('modal-city').value;
+        const state = document.getElementById('modal-state').value;
+        const pincode = document.getElementById('modal-pincode').value;
+        const established = document.getElementById('modal-established').value || new Date().toISOString().split('T')[0];
+        const address = document.getElementById('modal-address').value;
+        
+        // Add to mock data
+        const newId = "FC00" + (DATA.franchiseCenters.length + 1);
+        const newCode = city.substring(0,3).toUpperCase() + "00" + (DATA.franchiseCenters.length + 1);
+        
+        const newCenter = {
+          id: newId,
+          code: newCode,
+          name: name,
+          owner: owner,
+          mobile: mobile,
+          email: email,
+          address: address,
+          city: city,
+          state: state,
+          pincode: pincode,
+          status: 'Active',
+          established: established,
+          students: 0,
+          courses: 0,
+          rating: 5.0,
+          revenue: 0
+        };
+        
+        DATA.franchiseCenters.push(newCenter);
+        filterCenters();
+        
+        // Update stats counters
+        document.getElementById('total-centers-val').textContent = DATA.franchiseCenters.length;
+        document.getElementById('active-centers-val').textContent = DATA.franchiseCenters.filter(c=>c.status==='Active').length;
+        
+        showToast('Franchise center created successfully!', 'success');
+        document.getElementById('add-center-modal').classList.remove('active');
+        e.target.reset();
+        btn.textContent = 'Create Center';
+      }, 1500);
+    }
+
+    document.getElementById('sidebar-overlay').addEventListener('click', () => {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').style.display = 'none';
+    });
+  </script>
+</body>
+</html>

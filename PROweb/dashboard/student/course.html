@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Course – Student Portal</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <style>
+    .syllabus-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: space-between; }
+    .syllabus-title { font-weight: 600; font-size: 0.95rem; }
+    .syllabus-status { font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.625rem; border-radius: 9999px; }
+  </style>
+</head>
+<body class="dashboard-layout">
+  <div class="sidebar-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:199;display:none" id="sidebar-overlay"></div>
+  <aside class="sidebar scrollbar-thin">
+    <div class="sidebar-header"><div class="sidebar-logo"><div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg></div>TechPro</div><div class="sidebar-role">Student Portal</div></div>
+    <div class="sidebar-user"><div class="sidebar-avatar" style="background:linear-gradient(135deg,#4c1d95,#7c3aed)">P</div><div><div class="sidebar-user-name">Priya Patel</div><div class="sidebar-user-role">ADCA &bull; Roll: R2024002</div></div></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">My Portal</div>
+      <a href="index.html" class="sidebar-link"><span class="icon">&#128100;</span> My Profile</a>
+      <a href="course.html" class="sidebar-link active"><span class="icon">&#128218;</span> My Course</a>
+      <a href="certificate.html" class="sidebar-link"><span class="icon">&#127942;</span> Certificate</a>
+      <a href="marksheet.html" class="sidebar-link"><span class="icon">&#128203;</span> Marksheet</a>
+      <a href="status.html" class="sidebar-link"><span class="icon">&#128203;</span> Application Status</a>
+      <a href="notifications.html" class="sidebar-link"><span class="icon">&#128276;</span> Notifications <span class="sidebar-badge">2</span></a>
+      <div class="sidebar-section">Account</div>
+      <a href="../../pages/auth/login.html" class="sidebar-link" onclick="return confirm('Logout?')"><span class="icon">&#128682;</span> Logout</a>
+    </nav>
+  </aside>
+  <main class="dashboard-main">
+    <div class="dashboard-topbar">
+      <div class="topbar-left"><button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open');document.getElementById('sidebar-overlay').style.display=document.querySelector('.sidebar').classList.contains('open')?'block':'none'"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="topbar-title">Course Details</span></div>
+      <div class="topbar-right"><button class="dark-toggle topbar-icon-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg></button><div style="width:2rem;height:2rem;background:linear-gradient(135deg,#4c1d95,#7c3aed);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.875rem">P</div></div>
+    </div>
+    <div class="dashboard-content">
+      <div class="dashboard-page-header">
+        <h1>Advanced Diploma in Computer Applications (ADCA)</h1>
+        <p>Review course parameters, syllabus progression, and study resource links</p>
+      </div>
+
+      <!-- Course Meta Card -->
+      <div class="card" style="padding:2rem;margin-bottom:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem">
+        <div style="flex:1">
+          <div style="font-weight:700;color:var(--primary);font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem">Program Profile</div>
+          <h2 style="font-weight:800;font-size:1.5rem;margin-bottom:0.75rem">ADCA &bull; 12 Months Curriculum</h2>
+          <p style="color:var(--text-muted);font-size:0.925rem;line-height:1.6;max-width:560px">A professional course that trains students in advanced software applications, database reporting, accounting ledger management (Tally), graphics, and frontend scripting technologies.</p>
+        </div>
+        <div style="background:var(--bg-2);border-radius:var(--radius-xl);padding:1.5rem;border:1px solid var(--border);min-width:200px">
+          <div style="font-size:0.8rem;color:var(--text-muted);font-weight:600">TUITION FEE</div>
+          <div style="font-size:1.75rem;font-weight:800;color:var(--text);margin-top:0.25rem">₹15,000</div>
+          <div style="font-size:0.75rem;color:var(--success);font-weight:700;margin-top:0.25rem">Paid in Full ✓</div>
+        </div>
+      </div>
+
+      <!-- Syllabus Progress -->
+      <div class="grid-2" style="grid-template-columns: 2fr 1fr; align-items: flex-start;">
+        <div>
+          <h2 style="font-weight:800;font-size:1.25rem;margin-bottom:1rem">Module Progression Check</h2>
+          <div class="syllabus-card">
+            <div>
+              <span class="syllabus-title">Module 1: Computer Fundamentals & MS Office (DCA)</span>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem">Word, Excel, PowerPoint, Access</div>
+            </div>
+            <span class="badge badge-success syllabus-status">Passed (85%)</span>
+          </div>
+          <div class="syllabus-card">
+            <div>
+              <span class="syllabus-title">Module 2: Tally Prime with GST accounting</span>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem">Inventory ledger management, taxation filing</div>
+            </div>
+            <span class="badge badge-success syllabus-status">Passed (92%)</span>
+          </div>
+          <div class="syllabus-card">
+            <div>
+              <span class="syllabus-title">Module 3: Creative Graphic Designing & Desktop Publishing</span>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem">Photoshop, Illustrator, CorelDRAW, print layouts</div>
+            </div>
+            <span class="badge badge-success syllabus-status">Passed (90%)</span>
+          </div>
+          <div class="syllabus-card">
+            <div>
+              <span class="syllabus-title">Module 4: Web Scripting & HTML5/CSS3 Layouts</span>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem">Responsive styles, animations, hosting</div>
+            </div>
+            <span class="badge badge-warning syllabus-status" style="background:var(--primary-50);color:var(--primary)">In Progress</span>
+          </div>
+          <div class="syllabus-card">
+            <div>
+              <span class="syllabus-title">Module 5: Core Programming with C/C++ Languages</span>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem">OOP structures, compilers, sorting logic</div>
+            </div>
+            <span class="badge badge-gray syllabus-status">Upcoming</span>
+          </div>
+        </div>
+
+        <!-- Resources list -->
+        <div class="card" style="padding:1.5rem">
+          <h3 style="font-weight:700;font-size:1.1rem;margin-bottom:1rem">Academic Assets</h3>
+          <div style="display:flex;flex-direction:column;gap:0.75rem">
+            <button onclick="showToast('Downloading syllabus guide...','success')" class="btn btn-outline" style="justify-content:flex-start;width:100%"><span style="margin-right:0.5rem">📕</span> ADCA Course Syllabus.pdf</button>
+            <button onclick="showToast('Downloading Tally study guide...','success')" class="btn btn-outline" style="justify-content:flex-start;width:100%"><span style="margin-right:0.5rem">📘</span> Tally Prime Modules.pdf</button>
+            <button onclick="showToast('Downloading Photoshop guide...','success')" class="btn btn-outline" style="justify-content:flex-start;width:100%"><span style="margin-right:0.5rem">📙</span> Photoshop Reference Sheet.pdf</button>
+            <button onclick="showToast('Accessing online exams...','info')" class="btn btn-primary" style="justify-content:center;width:100%;margin-top:0.5rem">Access Online Exam Center</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../../data/dummy.js"></script><script src="../../assets/js/main.js"></script>
+  <script>document.getElementById('sidebar-overlay').addEventListener('click',()=>{document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebar-overlay').style.display='none';});</script>
+</body>
+</html>

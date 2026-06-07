@@ -1,0 +1,112 @@
+<!-- =====================================================
+     SHARED NAVBAR COMPONENT
+     Include this in every public page via JS or copy-paste
+===================================================== -->
+<nav id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <!-- Logo -->
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+          </svg>
+        </div>
+        <div>TechPro<span> Institute</span></div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+
+        <div class="nav-dropdown">
+          <a href="courses.html" class="nav-link">
+            Courses
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="courses.html" class="dropdown-item">📚 All Courses</a>
+            <a href="courses.html#diploma" class="dropdown-item">🎓 Diploma Courses</a>
+            <a href="courses.html#programming" class="dropdown-item">💻 Programming</a>
+            <a href="courses.html#accounting" class="dropdown-item">📊 Accounting</a>
+            <a href="courses.html#design" class="dropdown-item">🎨 Design</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <a href="verify/certificate.html" class="nav-link">
+            Verify
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="verify/certificate.html" class="dropdown-item">🏆 Certificate Verify</a>
+            <a href="verify/marksheet.html" class="dropdown-item">📋 Marksheet Verify</a>
+            <a href="verify/student.html" class="dropdown-item">👤 Student Verify</a>
+          </div>
+        </div>
+
+        <a href="franchise.html" class="nav-link">Franchise</a>
+        <a href="centers.html" class="nav-link">Centers</a>
+
+        <div class="nav-dropdown">
+          <a href="notice.html" class="nav-link">
+            More
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="gallery.html" class="dropdown-item">🖼️ Gallery</a>
+            <a href="notice.html" class="dropdown-item">📢 Notice Board</a>
+            <a href="blog.html" class="dropdown-item">✍️ Blog</a>
+            <a href="faq.html" class="dropdown-item">❓ FAQ</a>
+            <a href="contact.html" class="dropdown-item">📞 Contact</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-actions">
+        <button class="dark-toggle" title="Toggle Dark Mode">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+        <a href="auth/login.html" class="btn btn-outline btn-sm">Login</a>
+        <a href="auth/register.html" class="btn btn-primary btn-sm">Register</a>
+        <button class="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <div class="mobile-nav-header">
+    <a href="../index.html" class="logo">
+      <div class="logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/></svg>
+      </div>
+      TechPro Institute
+    </a>
+    <button class="mobile-nav-close" style="width:2.5rem;height:2.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);font-size:1.5rem;color:var(--text-muted)">×</button>
+  </div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About Us</a>
+    <a href="courses.html" class="mobile-nav-link">📚 Courses</a>
+    <a href="verify/certificate.html" class="mobile-nav-link">🏆 Verify Certificate</a>
+    <a href="verify/marksheet.html" class="mobile-nav-link">📋 Verify Marksheet</a>
+    <a href="verify/student.html" class="mobile-nav-link">👤 Verify Student</a>
+    <a href="franchise.html" class="mobile-nav-link">🏢 Franchise</a>
+    <a href="centers.html" class="mobile-nav-link">📍 Centers</a>
+    <a href="gallery.html" class="mobile-nav-link">🖼️ Gallery</a>
+    <a href="notice.html" class="mobile-nav-link">📢 Notice Board</a>
+    <a href="blog.html" class="mobile-nav-link">✍️ Blog</a>
+    <a href="faq.html" class="mobile-nav-link">❓ FAQ</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact</a>
+    <div style="height:1px;background:var(--border);margin:0.75rem 0;"></div>
+    <a href="auth/login.html" class="mobile-nav-link">🔐 Login</a>
+    <a href="auth/register.html" class="mobile-nav-link">✨ Register</a>
+  </div>
+</div>
